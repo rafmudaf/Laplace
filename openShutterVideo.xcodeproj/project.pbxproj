@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0585FD961E1869A50043071C /* CVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD951E1869A50043071C /* CVWrapper.mm */; };
+		0585FD9D1E186BDA0043071C /* UIImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD9A1E186BDA0043071C /* UIImage+OpenCV.mm */; };
+		0585FD9E1E186BDA0043071C /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD9C1E186BDA0043071C /* UIImage+Rotate.m */; };
+		0585FDA11E186BF90043071C /* stitching.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD9F1E186BF90043071C /* stitching.cpp */; };
 		05D980171C8D4CBA00F8A255 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D980161C8D4CBA00F8A255 /* AppDelegate.swift */; };
 		05D980191C8D4CBA00F8A255 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D980181C8D4CBA00F8A255 /* ViewController.swift */; };
 		05D9801C1C8D4CBA00F8A255 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05D9801A1C8D4CBA00F8A255 /* Main.storyboard */; };
@@ -17,7 +21,15 @@
 
 /* Begin PBXFileReference section */
 		054FFF73063AEFAD835919E8 /* Pods-openShutterVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-openShutterVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-openShutterVideo/Pods-openShutterVideo.release.xcconfig"; sourceTree = "<group>"; };
-		0585FD8D1E1865690043071C /* openShutterVideo-bridging-header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "openShutterVideo-bridging-header.h"; sourceTree = "<group>"; };
+		0585FD931E1868B00043071C /* openShutterVideo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "openShutterVideo-Bridging-Header.h"; sourceTree = "<group>"; };
+		0585FD941E1868E10043071C /* CVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVWrapper.h; sourceTree = "<group>"; };
+		0585FD951E1869A50043071C /* CVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVWrapper.mm; sourceTree = "<group>"; };
+		0585FD991E186BDA0043071C /* UIImage+OpenCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+OpenCV.h"; sourceTree = "<group>"; };
+		0585FD9A1E186BDA0043071C /* UIImage+OpenCV.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIImage+OpenCV.mm"; sourceTree = "<group>"; };
+		0585FD9B1E186BDA0043071C /* UIImage+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Rotate.h"; sourceTree = "<group>"; };
+		0585FD9C1E186BDA0043071C /* UIImage+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rotate.m"; sourceTree = "<group>"; };
+		0585FD9F1E186BF90043071C /* stitching.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stitching.cpp; sourceTree = "<group>"; };
+		0585FDA01E186BF90043071C /* stitching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stitching.h; sourceTree = "<group>"; };
 		05D980131C8D4CBA00F8A255 /* openShutterVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = openShutterVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05D980161C8D4CBA00F8A255 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05D980181C8D4CBA00F8A255 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,13 +74,21 @@
 		05D980151C8D4CBA00F8A255 /* openShutterVideo */ = {
 			isa = PBXGroup;
 			children = (
+				0585FD9F1E186BF90043071C /* stitching.cpp */,
+				0585FDA01E186BF90043071C /* stitching.h */,
+				0585FD991E186BDA0043071C /* UIImage+OpenCV.h */,
+				0585FD9A1E186BDA0043071C /* UIImage+OpenCV.mm */,
+				0585FD9B1E186BDA0043071C /* UIImage+Rotate.h */,
+				0585FD9C1E186BDA0043071C /* UIImage+Rotate.m */,
 				05D980161C8D4CBA00F8A255 /* AppDelegate.swift */,
 				05D980181C8D4CBA00F8A255 /* ViewController.swift */,
 				05D9801A1C8D4CBA00F8A255 /* Main.storyboard */,
 				05D9801D1C8D4CBA00F8A255 /* Assets.xcassets */,
 				05D9801F1C8D4CBA00F8A255 /* LaunchScreen.storyboard */,
 				05D980221C8D4CBA00F8A255 /* Info.plist */,
-				0585FD8D1E1865690043071C /* openShutterVideo-bridging-header.h */,
+				0585FD941E1868E10043071C /* CVWrapper.h */,
+				0585FD951E1869A50043071C /* CVWrapper.mm */,
+				0585FD931E1868B00043071C /* openShutterVideo-Bridging-Header.h */,
 			);
 			path = openShutterVideo;
 			sourceTree = "<group>";
@@ -126,6 +146,7 @@
 					05D980121C8D4CBA00F8A255 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = WYX936TWEU;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -213,8 +234,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0585FD9D1E186BDA0043071C /* UIImage+OpenCV.mm in Sources */,
+				0585FD961E1869A50043071C /* CVWrapper.mm in Sources */,
 				05D980191C8D4CBA00F8A255 /* ViewController.swift in Sources */,
+				0585FD9E1E186BDA0043071C /* UIImage+Rotate.m in Sources */,
 				05D980171C8D4CBA00F8A255 /* AppDelegate.swift in Sources */,
+				0585FDA11E186BF90043071C /* stitching.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,12 +360,15 @@
 			baseConfigurationReference = 09A3BBBC0A58C67852CE331B /* Pods-openShutterVideo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = openShutterVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = RafMudaf.openShutterVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "openShutterVideo/openShutterVideo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
@@ -350,12 +378,14 @@
 			baseConfigurationReference = 054FFF73063AEFAD835919E8 /* Pods-openShutterVideo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = openShutterVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = RafMudaf.openShutterVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "openShutterVideo/openShutterVideo-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
