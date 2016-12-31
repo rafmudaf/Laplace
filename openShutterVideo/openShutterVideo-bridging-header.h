@@ -1,14 +1,14 @@
 //
-//  openShutterVideo-bridging-header.h
+//  openShutterVideo-Bridging-Header.h
 //  openShutterVideo
 //
 //  Created by Rafael M Mudafort on 12/31/16.
 //  Copyright © 2016 Rafael M Mudafort. All rights reserved.
 //
 
-#ifndef openShutterVideo_bridging_header_h
-#define openShutterVideo_bridging_header_h
+#ifndef openShutterVideo_Bridging_Header_h
+#define openShutterVideo_Bridging_Header_h
 
-#import "OpenCVWrapper.h"
+#import "CVWrapper.h"
 
-#endif /* openShutterVideo_bridging_header_h */
+#endif /* openShutterVideo_Bridging_Header_h */
