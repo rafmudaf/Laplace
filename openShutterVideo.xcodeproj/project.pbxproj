@@ -1,0 +1,387 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05D980171C8D4CBA00F8A255 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D980161C8D4CBA00F8A255 /* AppDelegate.swift */; };
+		05D980191C8D4CBA00F8A255 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D980181C8D4CBA00F8A255 /* ViewController.swift */; };
+		05D9801C1C8D4CBA00F8A255 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05D9801A1C8D4CBA00F8A255 /* Main.storyboard */; };
+		05D9801E1C8D4CBA00F8A255 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05D9801D1C8D4CBA00F8A255 /* Assets.xcassets */; };
+		05D980211C8D4CBA00F8A255 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05D9801F1C8D4CBA00F8A255 /* LaunchScreen.storyboard */; };
+		A806B20E19FEB865070F9A2B /* Pods_openShutterVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A48718957711FE477CDB6DB5 /* Pods_openShutterVideo.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		054FFF73063AEFAD835919E8 /* Pods-openShutterVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-openShutterVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-openShutterVideo/Pods-openShutterVideo.release.xcconfig"; sourceTree = "<group>"; };
+		0585FD8D1E1865690043071C /* openShutterVideo-bridging-header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "openShutterVideo-bridging-header.h"; sourceTree = "<group>"; };
+		05D980131C8D4CBA00F8A255 /* openShutterVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = openShutterVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05D980161C8D4CBA00F8A255 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		05D980181C8D4CBA00F8A255 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		05D9801B1C8D4CBA00F8A255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		05D9801D1C8D4CBA00F8A255 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		05D980201C8D4CBA00F8A255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		05D980221C8D4CBA00F8A255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09A3BBBC0A58C67852CE331B /* Pods-openShutterVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-openShutterVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-openShutterVideo/Pods-openShutterVideo.debug.xcconfig"; sourceTree = "<group>"; };
+		A48718957711FE477CDB6DB5 /* Pods_openShutterVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_openShutterVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		05D980101C8D4CBA00F8A255 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A806B20E19FEB865070F9A2B /* Pods_openShutterVideo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05D9800A1C8D4CBA00F8A255 = {
+			isa = PBXGroup;
+			children = (
+				05D980151C8D4CBA00F8A255 /* openShutterVideo */,
+				05D980141C8D4CBA00F8A255 /* Products */,
+				D42813D93DACCDE109A1DC78 /* Pods */,
+				0C37121B526784B186D229FD /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		05D980141C8D4CBA00F8A255 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05D980131C8D4CBA00F8A255 /* openShutterVideo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		05D980151C8D4CBA00F8A255 /* openShutterVideo */ = {
+			isa = PBXGroup;
+			children = (
+				05D980161C8D4CBA00F8A255 /* AppDelegate.swift */,
+				05D980181C8D4CBA00F8A255 /* ViewController.swift */,
+				05D9801A1C8D4CBA00F8A255 /* Main.storyboard */,
+				05D9801D1C8D4CBA00F8A255 /* Assets.xcassets */,
+				05D9801F1C8D4CBA00F8A255 /* LaunchScreen.storyboard */,
+				05D980221C8D4CBA00F8A255 /* Info.plist */,
+				0585FD8D1E1865690043071C /* openShutterVideo-bridging-header.h */,
+			);
+			path = openShutterVideo;
+			sourceTree = "<group>";
+		};
+		0C37121B526784B186D229FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A48718957711FE477CDB6DB5 /* Pods_openShutterVideo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D42813D93DACCDE109A1DC78 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				09A3BBBC0A58C67852CE331B /* Pods-openShutterVideo.debug.xcconfig */,
+				054FFF73063AEFAD835919E8 /* Pods-openShutterVideo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		05D980121C8D4CBA00F8A255 /* openShutterVideo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05D9803B1C8D4CBA00F8A255 /* Build configuration list for PBXNativeTarget "openShutterVideo" */;
+			buildPhases = (
+				11BD59F60B8A7D0C4C6BB8EC /* [CP] Check Pods Manifest.lock */,
+				05D9800F1C8D4CBA00F8A255 /* Sources */,
+				05D980101C8D4CBA00F8A255 /* Frameworks */,
+				05D980111C8D4CBA00F8A255 /* Resources */,
+				187D70222CB7AC1EAEBFA6BB /* [CP] Embed Pods Frameworks */,
+				DBE18573D720344F26398CF1 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = openShutterVideo;
+			productName = openShutterVideo;
+			productReference = 05D980131C8D4CBA00F8A255 /* openShutterVideo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		05D9800B1C8D4CBA00F8A255 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Rafael M Mudafort";
+				TargetAttributes = {
+					05D980121C8D4CBA00F8A255 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = WYX936TWEU;
+					};
+				};
+			};
+			buildConfigurationList = 05D9800E1C8D4CBA00F8A255 /* Build configuration list for PBXProject "openShutterVideo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 05D9800A1C8D4CBA00F8A255;
+			productRefGroup = 05D980141C8D4CBA00F8A255 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05D980121C8D4CBA00F8A255 /* openShutterVideo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		05D980111C8D4CBA00F8A255 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05D980211C8D4CBA00F8A255 /* LaunchScreen.storyboard in Resources */,
+				05D9801E1C8D4CBA00F8A255 /* Assets.xcassets in Resources */,
+				05D9801C1C8D4CBA00F8A255 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		11BD59F60B8A7D0C4C6BB8EC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		187D70222CB7AC1EAEBFA6BB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-openShutterVideo/Pods-openShutterVideo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DBE18573D720344F26398CF1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-openShutterVideo/Pods-openShutterVideo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		05D9800F1C8D4CBA00F8A255 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05D980191C8D4CBA00F8A255 /* ViewController.swift in Sources */,
+				05D980171C8D4CBA00F8A255 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		05D9801A1C8D4CBA00F8A255 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05D9801B1C8D4CBA00F8A255 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		05D9801F1C8D4CBA00F8A255 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05D980201C8D4CBA00F8A255 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		05D980391C8D4CBA00F8A255 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		05D9803A1C8D4CBA00F8A255 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		05D9803C1C8D4CBA00F8A255 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09A3BBBC0A58C67852CE331B /* Pods-openShutterVideo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = openShutterVideo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = RafMudaf.openShutterVideo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
+			};
+			name = Debug;
+		};
+		05D9803D1C8D4CBA00F8A255 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 054FFF73063AEFAD835919E8 /* Pods-openShutterVideo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = openShutterVideo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = RafMudaf.openShutterVideo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05D9800E1C8D4CBA00F8A255 /* Build configuration list for PBXProject "openShutterVideo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05D980391C8D4CBA00F8A255 /* Debug */,
+				05D9803A1C8D4CBA00F8A255 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05D9803B1C8D4CBA00F8A255 /* Build configuration list for PBXNativeTarget "openShutterVideo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05D9803C1C8D4CBA00F8A255 /* Debug */,
+				05D9803D1C8D4CBA00F8A255 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 05D9800B1C8D4CBA00F8A255 /* Project object */;
+}
