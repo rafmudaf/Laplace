@@ -458,30 +458,71 @@ class CameraController: NSObject {
 
 // MARK: - Delegate methods
 extension CameraController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
-    
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
-        let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
-        let image = CIImage(CVPixelBuffer: pixelBuffer!)
-        self.delegate?.cameraController(self, didOutputImage: image)
+
+    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+//        var faces = Array<(id:Int,frame:CGRect)>()
+//        for metadataObject in metadataObjects as! [AVMetadataObject] {
+//            if metadataObject.type == AVMetadataObjectTypeFace {
+//                if let faceObject = metadataObject as? AVMetadataFaceObject {
+//                    let transformedMetadataObject = previewLayer.transformedMetadataObjectForMetadataObject(metadataObject)
+//                    let face:(id: Int, frame: CGRect) = (faceObject.faceID, transformedMetadataObject.bounds)
+//                    faces.append(face)
+//                }
+//            }
+//        }
+
+//        if let delegate = self.delegate {
+//            dispatch_async(dispatch_get_main_queue()) {
+//                delegate.cameraController(self, didDetectFaces: faces)
+//            }
+//        }
     }
     
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
-        var faces = Array<(id:Int,frame:CGRect)>()
-        for metadataObject in metadataObjects as! [AVMetadataObject] {
-            if metadataObject.type == AVMetadataObjectTypeFace {
-                if let faceObject = metadataObject as? AVMetadataFaceObject {
-                    let transformedMetadataObject = previewLayer.transformedMetadataObjectForMetadataObject(metadataObject)
-                    let face:(id: Int, frame: CGRect) = (faceObject.faceID, transformedMetadataObject.bounds)
-                    faces.append(face)
-                }
-            }
+    func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
+        let uiimage = imageFromSampleBuffer(sampleBuffer)
+        let ocvimage = CVWrapper.processImageWithOpenCV(uiimage)
+        let ciimage = CIImage(image: ocvimage)
+        if ciimage != nil {
+            self.delegate?.cameraController(self, didOutputImage: ciimage!)
         }
+    }
+    
+    func imageFromSampleBuffer(sampleBuffer : CMSampleBuffer) -> UIImage {
+        // Get a CMSampleBuffer's Core Video image buffer for the media data
+        let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         
-        if let delegate = self.delegate {
-            dispatch_async(dispatch_get_main_queue()) {
-                delegate.cameraController(self, didDetectFaces: faces)
-            }
-        }
+        // Lock the base address of the pixel buffer
+        CVPixelBufferLockBaseAddress(imageBuffer!, CVPixelBufferLockFlags.ReadOnly)
+        
+        // Get the number of bytes per row for the pixel buffer
+        let baseAddress = CVPixelBufferGetBaseAddress(imageBuffer!)
+        
+        // Get the number of bytes per row for the pixel buffer
+        let bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer!)
+        
+        // Get the pixel buffer width and height
+        let width = CVPixelBufferGetWidth(imageBuffer!)
+        let height = CVPixelBufferGetHeight(imageBuffer!)
+        
+        // Create a device-dependent RGB color space
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        
+        // Create a bitmap graphics context with the sample buffer data
+        var bitmapInfo: UInt32 = CGBitmapInfo.ByteOrder32Little.rawValue
+        bitmapInfo |= CGImageAlphaInfo.PremultipliedFirst.rawValue & CGBitmapInfo.AlphaInfoMask.rawValue
+        //let bitmapInfo: UInt32 = CGBitmapInfo.alphaInfoMask.rawValue
+        let context = CGBitmapContextCreateWithData(baseAddress, width, height, 8, bytesPerRow, colorSpace, bitmapInfo, nil, nil)
+        
+        // Create a Quartz image from the pixel data in the bitmap graphics context
+        let quartzImage = CGBitmapContextCreateImage(context!)
+        
+        // Unlock the pixel buffer
+        CVPixelBufferUnlockBaseAddress(imageBuffer!, CVPixelBufferLockFlags.ReadOnly)
+        
+        // Create an image object from the Quartz image
+        let image = UIImage(CGImage: quartzImage!)
+        
+        return image
     }
 }
 
@@ -561,6 +602,11 @@ private extension CameraController {
     func configureVideoOutput() {
         performConfiguration { () -> Void in
             self.videoOutput = AVCaptureVideoDataOutput()
+            
+//            self.videoOutput.videoSettings = NSDictionary(object: kCVPixelFormatType_32BGRA as NSNumber, forKey: kCVPixelBufferPixelFormatTypeKey as NSString)
+            self.videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as NSString: Int(kCVPixelFormatType_32BGRA)]
+
+            
             self.videoOutput.setSampleBufferDelegate(self, queue: dispatch_queue_create("sample buffer delegate", DISPATCH_QUEUE_SERIAL))
             if self.session.canAddOutput(self.videoOutput) {
                 self.session.addOutput(self.videoOutput)
