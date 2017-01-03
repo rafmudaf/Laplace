@@ -9,10 +9,8 @@
 import UIKit
 import AVFoundation
 import GLKit
-//import CoreImage
-//import OpenGLES
 
-class ViewController: UIViewController, CameraControllerDelegate {// AVCaptureVideoDataOutputSampleBufferDelegate,  {
+class ViewController: UIViewController, CameraControllerDelegate {
 
     @IBOutlet weak var videoPreviewView: UIView!
     
@@ -29,15 +27,15 @@ class ViewController: UIViewController, CameraControllerDelegate {// AVCaptureVi
         cameraController = CameraController(previewType: .Manual, delegate: self)
         
         glContext = EAGLContext(API: .OpenGLES2)
-        
         glView = GLKView(frame: videoPreviewView.frame, context: glContext!)
-        glView!.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+        
+        let translationrotation = CGAffineTransformConcat(CGAffineTransformMakeRotation(CGFloat(M_PI_2)), CGAffineTransformMakeTranslation(-1*glView!.frame.minX, -1*glView!.frame.minY))
+        glView!.transform = translationrotation
         if let window = glView!.window {
             glView!.frame = window.bounds
         }
         
         ciContext = CIContext(EAGLContext: glContext!)
-        
         videoPreviewView.addSubview(glView!)
     }
     
@@ -45,17 +43,6 @@ class ViewController: UIViewController, CameraControllerDelegate {// AVCaptureVi
         super.viewWillAppear(animated)
         cameraController.startRunning()
     }
-    
-//    func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
-//        let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
-//        let image = CIImage(CVPixelBuffer: pixelBuffer!)
-//        if glContext != EAGLContext.currentContext() {
-//            EAGLContext.setCurrentContext(glContext)
-//        }
-//        glView!.bindDrawable()
-//        ciContext!.drawImage(image, inRect: image.extent, fromRect: image.extent)
-//        glView!.display()
-//    }
     
     // MARK: - CameraControllerDelegate
     func cameraController(cameraController: CameraController, didDetectFaces faces:Array<(id:Int,frame:CGRect)>) { }
