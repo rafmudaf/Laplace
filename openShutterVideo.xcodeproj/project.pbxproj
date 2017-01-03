@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		057B116F1E1A3E420078725B /* openshutter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057B116D1E1A3E420078725B /* openshutter.cpp */; };
 		0585FD961E1869A50043071C /* CVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD951E1869A50043071C /* CVWrapper.mm */; };
 		0585FD9D1E186BDA0043071C /* UIImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD9A1E186BDA0043071C /* UIImage+OpenCV.mm */; };
 		0585FD9E1E186BDA0043071C /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD9C1E186BDA0043071C /* UIImage+Rotate.m */; };
@@ -22,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		054FFF73063AEFAD835919E8 /* Pods-openShutterVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-openShutterVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-openShutterVideo/Pods-openShutterVideo.release.xcconfig"; sourceTree = "<group>"; };
+		057B116D1E1A3E420078725B /* openshutter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = openshutter.cpp; sourceTree = "<group>"; };
+		057B116E1E1A3E420078725B /* openshutter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = openshutter.hpp; sourceTree = "<group>"; };
 		0585FD931E1868B00043071C /* openShutterVideo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "openShutterVideo-Bridging-Header.h"; sourceTree = "<group>"; };
 		0585FD941E1868E10043071C /* CVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVWrapper.h; sourceTree = "<group>"; };
 		0585FD951E1869A50043071C /* CVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVWrapper.mm; sourceTree = "<group>"; };
@@ -92,6 +95,8 @@
 				0585FD951E1869A50043071C /* CVWrapper.mm */,
 				0585FD931E1868B00043071C /* openShutterVideo-Bridging-Header.h */,
 				0585FDA21E19BCD40043071C /* CameraController.swift */,
+				057B116D1E1A3E420078725B /* openshutter.cpp */,
+				057B116E1E1A3E420078725B /* openshutter.hpp */,
 			);
 			path = openShutterVideo;
 			sourceTree = "<group>";
@@ -238,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0585FD9D1E186BDA0043071C /* UIImage+OpenCV.mm in Sources */,
+				057B116F1E1A3E420078725B /* openshutter.cpp in Sources */,
 				0585FD961E1869A50043071C /* CVWrapper.mm in Sources */,
 				0585FDA31E19BCD40043071C /* CameraController.swift in Sources */,
 				05D980191C8D4CBA00F8A255 /* ViewController.swift in Sources */,
@@ -368,7 +374,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = openShutterVideo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = RafMudaf.openShutterVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -387,7 +393,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = openShutterVideo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = RafMudaf.openShutterVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
