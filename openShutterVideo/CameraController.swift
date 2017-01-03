@@ -133,6 +133,34 @@ class CameraController: NSObject {
         }
     }
     
+    func switchCamera() {
+        if session != nil {
+            session.beginConfiguration()
+            
+            let currentCameraInput = session.inputs.first as! AVCaptureInput
+            session.removeInput(currentCameraInput)
+            
+            // Swap cameras
+            if self.currentCameraDevice?.position == .Back {
+                self.currentCameraDevice = self.frontCameraDevice
+            } else if self.currentCameraDevice?.position == .Front {
+                self.currentCameraDevice = self.backCameraDevice
+            }
+            
+            do {
+                let possibleCameraInput = try AVCaptureDeviceInput(device: self.currentCameraDevice)
+                let backCameraInput = possibleCameraInput
+                if self.session.canAddInput(backCameraInput) {
+                    self.session.addInput(backCameraInput)
+                }
+            } catch {
+                print("error capturing the device \(error)")
+            }
+            
+            session.commitConfiguration()
+        }
+    }
+    
     // MARK: - Camera Control
     func startRunning() {
         performConfiguration { () -> Void in

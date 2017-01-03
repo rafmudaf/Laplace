@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,21 +27,39 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMW-Nl-vk4">
+                                <rect key="frame" x="276" y="28" width="75" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="iMW-Nl-vk4" secondAttribute="height" multiplier="1:1" id="L75-uf-MnA"/>
+                                    <constraint firstAttribute="height" constant="75" id="val-gE-CAD"/>
+                                </constraints>
+                                <state key="normal" image="SwitchCamera"/>
+                                <connections>
+                                    <action selector="swapCameraButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Xs-45-biF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="P00-qU-5gW" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="BP6-yf-tcw"/>
                             <constraint firstItem="P00-qU-5gW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="I25-F4-VGk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iMW-Nl-vk4" secondAttribute="trailing" constant="8" id="N7v-KZ-Nii"/>
                             <constraint firstItem="P00-qU-5gW" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="S2s-b2-6FR"/>
                             <constraint firstItem="P00-qU-5gW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="VKf-El-Ud2"/>
+                            <constraint firstItem="iMW-Nl-vk4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="aYj-xu-diO"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="swapCameraButton" destination="iMW-Nl-vk4" id="CLu-k3-rpx"/>
                         <outlet property="videoPreviewView" destination="P00-qU-5gW" id="a0x-My-e8d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="96.7016491754123"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="SwitchCamera" width="25" height="25"/>
+    </resources>
 </document>

@@ -13,6 +13,7 @@ import GLKit
 class ViewController: UIViewController, CameraControllerDelegate {
 
     @IBOutlet weak var videoPreviewView: UIView!
+    @IBOutlet weak var swapCameraButton: UIButton!
     
     var glContext: EAGLContext?
     var ciContext: CIContext?
@@ -45,6 +46,10 @@ class ViewController: UIViewController, CameraControllerDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         cameraController.startRunning()
+    }
+    
+    @IBAction func swapCameraButtonClicked(sender: AnyObject) {
+        cameraController.switchCamera()
     }
     
     // MARK: - CameraControllerDelegate
