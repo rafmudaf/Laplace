@@ -521,6 +521,7 @@ extension CameraController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVid
         
         // Create an image object from the Quartz image
         let image = UIImage(CGImage: quartzImage!)
+//        let image = UIImage(CGImage: quartzImage!, scale: 1.0, orientation: UIImageOrientation.Right)
         
         return image
     }
