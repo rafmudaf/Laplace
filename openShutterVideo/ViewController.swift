@@ -29,11 +29,14 @@ class ViewController: UIViewController, CameraControllerDelegate {
         glContext = EAGLContext(API: .OpenGLES2)
         glView = GLKView(frame: videoPreviewView.frame, context: glContext!)
         
-        let translationrotation = CGAffineTransformConcat(CGAffineTransformMakeRotation(CGFloat(M_PI_2)), CGAffineTransformMakeTranslation(-1*glView!.frame.minX, -1*glView!.frame.minY))
-        glView!.transform = translationrotation
-        if let window = glView!.window {
-            glView!.frame = window.bounds
-        }
+        glView!.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+        
+        // what does this do?
+//        if let window = glView!.window {
+//            glView!.frame = window.bounds
+//        }
+        
+        glView!.frame = videoPreviewView.frame
         
         ciContext = CIContext(EAGLContext: glContext!)
         videoPreviewView.addSubview(glView!)
