@@ -92,7 +92,7 @@
     
     CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
 
-        // Creating CGImage from cv::Mat
+    // Creating CGImage from cv::Mat
     CGImageRef imageRef = CGImageCreate(cvMat.cols,                                 //width
                                         cvMat.rows,                                 //height
                                         8,                                          //bits per component
@@ -106,7 +106,7 @@
                                         kCGRenderingIntentDefault                   //intent
                                         );                     
     
-        // Getting UIImage from CGImage
+    // Getting UIImage from CGImage
     self = [self initWithCGImage:imageRef];
     CGImageRelease(imageRef);
     CGDataProviderRelease(provider);
