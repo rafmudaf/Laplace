@@ -12,5 +12,6 @@
 @interface CVWrapper : NSObject
 
 + (UIImage*) processImageWithOpenCV: (UIImage*) inputImage;
++ (UIImage*) getLastProcessedFrame;
 
 @end

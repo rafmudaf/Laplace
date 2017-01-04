@@ -21,8 +21,13 @@
 + (UIImage*) processImageWithOpenCV: (UIImage*) inputImage {
     Mat mat;
     UIImageToMat(inputImage, mat, true);
-    UIImage* result = MatToUIImage(openshutter(mat));
+    Mat openMat = openshutter(mat);
+    UIImage* result = MatToUIImage(openMat);
     return result;
+}
+
++ (UIImage*) getLastProcessedFrame {
+    return MatToUIImage(lastframe());
 }
 
 @end
