@@ -508,7 +508,10 @@ extension CameraController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVid
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
         let uiimage = imageFromSampleBuffer(sampleBuffer)
-        let ocvimage = CVWrapper.processImageWithOpenCV(uiimage)
+        var ocvimage = CVWrapper.processImageWithOpenCV(uiimage)
+        if self.currentCameraDevice?.position == .Front {
+            ocvimage = UIImage(CGImage: ocvimage.CGImage!, scale: ocvimage.scale, orientation: .LeftMirrored)
+        }
         let ciimage = CIImage(image: ocvimage)
         if ciimage != nil {
             self.delegate?.cameraController(self, didOutputImage: ciimage!)
