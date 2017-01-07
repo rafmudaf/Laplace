@@ -9,6 +9,7 @@
 import AVFoundation
 import UIKit
 import GLKit
+import AssetsLibrary
 
 let CameraControllerDidStartSession = "CameraControllerDidStartSession"
 let CameraControllerDidStopSession = "CameraControllerDidStopSession"
@@ -63,6 +64,9 @@ class CameraController: NSObject {
     var previewType: CameraControllePreviewType
     
     var previewLayer: AVCaptureVideoPreviewLayer!
+    var currentSampleBuffer: CMSampleBufferRef?
+    var newSampleBufferExists = false
+    var currentlyRecording = false
     
     var enableBracketedCapture: Bool = false {
         didSet {
@@ -78,6 +82,8 @@ class CameraController: NSObject {
     private var backCameraDevice:AVCaptureDevice?
     private var frontCameraDevice:AVCaptureDevice?
     private var stillCameraOutput:AVCaptureStillImageOutput!
+    private var movieFileOutput:AVCaptureMovieFileOutput!
+    private var assetWriter:AVAssetWriter!
     private var videoOutput:AVCaptureVideoDataOutput!
     private var metadataOutput:AVCaptureMetadataOutput!
     private var lensPositionContext = 0
@@ -107,7 +113,10 @@ class CameraController: NSObject {
     func initializeSession() {
         
         session = AVCaptureSession()
-        session.sessionPreset = AVCaptureSessionPresetPhoto
+        if session.canSetSessionPreset(AVCaptureSessionPreset1280x720) {
+//            session.sessionPreset = AVCaptureSessionPresetPhoto
+            session.sessionPreset = AVCaptureSessionPreset1280x720
+        }
         
         if previewType == .PreviewLayer {
             previewLayer = AVCaptureVideoPreviewLayer(session: self.session) as AVCaptureVideoPreviewLayer
@@ -117,15 +126,14 @@ class CameraController: NSObject {
         
         switch authorizationStatus {
         case .NotDetermined:
-            AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo,
-                                                      completionHandler: { (granted:Bool) -> Void in
-                                                        if granted {
-                                                            self.configureSession()
-                                                        }
-                                                        else {
-                                                            self.showAccessDeniedMessage()
-                                                        }
-            })
+            AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { (granted: Bool) -> Void in
+                if granted {
+                    self.configureSession()
+                }
+                else {
+                    self.showAccessDeniedMessage()
+                }
+            }
         case .Authorized:
             configureSession()
         case .Denied, .Restricted:
@@ -135,29 +143,94 @@ class CameraController: NSObject {
     
     func switchCamera() {
         if session != nil {
-            session.beginConfiguration()
             
             let currentCameraInput = session.inputs.first as! AVCaptureInput
-            session.removeInput(currentCameraInput)
-            
-            // Swap cameras
             if self.currentCameraDevice?.position == .Back {
                 self.currentCameraDevice = self.frontCameraDevice
             } else if self.currentCameraDevice?.position == .Front {
                 self.currentCameraDevice = self.backCameraDevice
             }
             
+            // Swap cameras
+            session.beginConfiguration()
+            session.removeInput(currentCameraInput)
             do {
                 let possibleCameraInput = try AVCaptureDeviceInput(device: self.currentCameraDevice)
-                let backCameraInput = possibleCameraInput
-                if self.session.canAddInput(backCameraInput) {
-                    self.session.addInput(backCameraInput)
+                if self.session.canAddInput(possibleCameraInput) {
+                    self.session.addInput(possibleCameraInput)
                 }
             } catch {
                 print("error capturing the device \(error)")
             }
-            
             session.commitConfiguration()
+        }
+    }
+    
+    // MARK: - Save Output
+    func toggleRecording() {
+        // Create temporary URL to record to
+        let outputPath = String(format: "%@%@", NSTemporaryDirectory(), "output.mov")
+        let outputURL = NSURL(fileURLWithPath: outputPath)
+        let fileManager = NSFileManager.defaultManager()
+        
+        if !currentlyRecording {
+            
+            // Make sure we can save at the given url
+            if fileManager.fileExistsAtPath(outputPath) {
+                do {
+                    print("removing item at path \(outputPath)")
+                    try fileManager.removeItemAtPath(outputPath)
+                } catch {
+                    print("error removing item at path \(outputPath): \(error)")
+                }
+            }
+            
+            do {
+                self.assetWriter = try AVAssetWriter(URL: outputURL, fileType: AVFileTypeQuickTimeMovie)
+                let writerInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: nil)
+                writerInput.expectsMediaDataInRealTime = true
+                
+                if assetWriter.canAddInput(writerInput) {
+                    assetWriter.addInput(writerInput)
+                }
+
+//                let adaptor = AVAssetWriterInputPixelBufferAdaptor (
+//                    assetWriterInput: writerInput,
+//                    sourcePixelBufferAttributes: [
+//                        kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32ARGB),
+//                        kCVPixelBufferWidthKey as String: asset.size.width,
+//                        kCVPixelBufferHeightKey as String: asset.size.height,
+//                    ])
+                assetWriter.startWriting()
+                assetWriter.startSessionAtSourceTime(kCMTimeZero)
+                
+                writerInput.requestMediaDataWhenReadyOnQueue(dispatch_queue_create("VideoWriterQueue", DISPATCH_QUEUE_SERIAL)) {
+                    while writerInput.readyForMoreMediaData {
+                        if self.newSampleBufferExists {
+                            if let samplebuffer = self.currentSampleBuffer {
+                                writerInput.appendSampleBuffer(samplebuffer)
+                                self.currentSampleBuffer = nil
+                                self.newSampleBufferExists = false
+                            }
+                        }
+                    }
+                }
+                
+                currentlyRecording = true
+                print("recording")
+                
+            } catch {
+                
+            }
+        } else {
+            // Stop recording
+            assetWriter.inputs[0].markAsFinished()
+            assetWriter.endSessionAtSourceTime(CMTime(seconds: 10, preferredTimescale: 1))
+            assetWriter.finishWritingWithCompletionHandler({
+                UISaveVideoAtPathToSavedPhotosAlbum(outputPath, self, nil, nil)
+                print("1")
+            })
+            currentlyRecording = false
         }
     }
     
@@ -485,8 +558,8 @@ class CameraController: NSObject {
 }
 
 // MARK: - Delegate methods
-extension CameraController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
-
+extension CameraController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate {
+    
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
 //        var faces = Array<(id:Int,frame:CGRect)>()
 //        for metadataObject in metadataObjects as! [AVMetadataObject] {
@@ -507,18 +580,20 @@ extension CameraController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVid
     }
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
-        let uiimage = imageFromSampleBuffer(sampleBuffer)
-        var ocvimage = CVWrapper.processImageWithOpenCV(uiimage)
-        if self.currentCameraDevice?.position == .Front {
-            ocvimage = UIImage(CGImage: ocvimage.CGImage!, scale: ocvimage.scale, orientation: .LeftMirrored)
-        }
-        let ciimage = CIImage(image: ocvimage)
+        currentSampleBuffer = sampleBuffer
+        newSampleBufferExists = true
+        let uiimage = uiimageFromSampleBuffer(sampleBuffer)
+//        var ocvimage = CVWrapper.processImageWithOpenCV(uiimage)
+//        if self.currentCameraDevice?.position == .Front {
+//            ocvimage = UIImage(CGImage: ocvimage.CGImage!, scale: ocvimage.scale, orientation: .LeftMirrored)
+//        }
+        let ciimage = CIImage(image: uiimage)
         if ciimage != nil {
             self.delegate?.cameraController(self, didOutputImage: ciimage!)
         }
     }
     
-    func imageFromSampleBuffer(sampleBuffer : CMSampleBuffer) -> UIImage {
+    func uiimageFromSampleBuffer(sampleBuffer : CMSampleBuffer) -> UIImage {
         // Get a CMSampleBuffer's Core Video image buffer for the media data
         let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         
@@ -556,6 +631,24 @@ extension CameraController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVid
         
         return image
     }
+    
+    func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
+        
+        print("2")
+        
+        if error != nil {
+            print("error in recording video: \(error)")
+        }
+        
+//        let library = ALAssetsLibrary()
+//        if library.videoAtPathIsCompatibleWithSavedPhotosAlbum(outputFileURL) {
+//            library.writeVideoAtPathToSavedPhotosAlbum(outputFileURL, completionBlock: { (assetURL, error) in
+//                if error != nil {
+//                    print("error in saving video: \(error)")
+//                }
+//            })
+//        }
+    }
 }
 
 // MARK: - Private
@@ -584,6 +677,7 @@ private extension CameraController {
         configureDeviceInput()
         configureStillImageCameraOutput()
         configureFaceDetection()
+//        configureMovieOutput()
         
         if previewType == .Manual {
             configureVideoOutput()
@@ -635,13 +729,24 @@ private extension CameraController {
         performConfiguration { () -> Void in
             self.videoOutput = AVCaptureVideoDataOutput()
             
-//            self.videoOutput.videoSettings = NSDictionary(object: kCVPixelFormatType_32BGRA as NSNumber, forKey: kCVPixelBufferPixelFormatTypeKey as NSString)
             self.videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as NSString: Int(kCVPixelFormatType_32BGRA)]
-
             
-            self.videoOutput.setSampleBufferDelegate(self, queue: dispatch_queue_create("sample buffer delegate", DISPATCH_QUEUE_SERIAL))
+            self.videoOutput.setSampleBufferDelegate(self, queue: dispatch_queue_create("VideoDataOutputQueue", DISPATCH_QUEUE_SERIAL))
             if self.session.canAddOutput(self.videoOutput) {
                 self.session.addOutput(self.videoOutput)
+            }
+        }
+    }
+    
+    func configureMovieOutput() {
+        performConfiguration { () -> Void in
+            
+            self.movieFileOutput = AVCaptureMovieFileOutput()
+            
+//            self.movieFileOutput.setOutputSettings(<#T##outputSettings: [NSObject : AnyObject]!##[NSObject : AnyObject]!#>, forConnection: <#T##AVCaptureConnection!#>)
+            
+            if self.session.canAddOutput(self.movieFileOutput) {
+                self.session.addOutput(self.movieFileOutput)
             }
         }
     }
