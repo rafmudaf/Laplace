@@ -1,6 +1,0 @@
-framework module Pods_openShutterVideo {
-  umbrella header "Pods-openShutterVideo-umbrella.h"
-
-  export *
-  module * { export * }
-}

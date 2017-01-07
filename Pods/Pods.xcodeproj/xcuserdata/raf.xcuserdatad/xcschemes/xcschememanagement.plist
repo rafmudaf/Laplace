@@ -4,35 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-openShutterVideo.xcscheme</key>
+		<key>Pods-LongExposureVideo.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-		</dict>
-		<key>Pods-openShutterVideoTests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-openShutterVideoUITests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>056CC4F2C078F5494823A917BE15E6A9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BCB98AB74473A95A9B27F48777C7E025</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C5E2E4B30B6E1B8579F3EC72A71B93BC</key>
+		<key>E455F97152BC76D7D20B21594D8C6C66</key>
 		<dict>
 			<key>primary</key>
 			<true/>
