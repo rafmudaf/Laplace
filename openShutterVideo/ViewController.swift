@@ -14,6 +14,7 @@ class ViewController: UIViewController, CameraControllerDelegate {
 
     @IBOutlet weak var videoPreviewView: UIView!
     @IBOutlet weak var swapCameraButton: UIButton!
+    @IBOutlet weak var recordVideoButton: UIButton!
     
     var glContext: EAGLContext?
     var ciContext: CIContext?
@@ -50,6 +51,10 @@ class ViewController: UIViewController, CameraControllerDelegate {
     
     @IBAction func swapCameraButtonClicked(sender: AnyObject) {
         cameraController.switchCamera()
+    }
+    
+    @IBAction func recordVideoButtonClicked(sender: AnyObject) {
+        cameraController.toggleRecording()
     }
     
     // MARK: - CameraControllerDelegate
