@@ -11,13 +11,13 @@
 		0585FD961E1869A50043071C /* CVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD951E1869A50043071C /* CVWrapper.mm */; };
 		0585FD9D1E186BDA0043071C /* UIImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD9A1E186BDA0043071C /* UIImage+OpenCV.mm */; };
 		0585FD9E1E186BDA0043071C /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD9C1E186BDA0043071C /* UIImage+Rotate.m */; };
-		0585FDA11E186BF90043071C /* stitching.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD9F1E186BF90043071C /* stitching.cpp */; };
-		0585FDA31E19BCD40043071C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0585FDA21E19BCD40043071C /* CameraController.swift */; };
+		05B404231E21D076004B68F5 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B404221E21D076004B68F5 /* PreviewView.swift */; };
 		05D980171C8D4CBA00F8A255 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D980161C8D4CBA00F8A255 /* AppDelegate.swift */; };
 		05D980191C8D4CBA00F8A255 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D980181C8D4CBA00F8A255 /* ViewController.swift */; };
 		05D9801C1C8D4CBA00F8A255 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05D9801A1C8D4CBA00F8A255 /* Main.storyboard */; };
 		05D9801E1C8D4CBA00F8A255 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05D9801D1C8D4CBA00F8A255 /* Assets.xcassets */; };
 		05D980211C8D4CBA00F8A255 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05D9801F1C8D4CBA00F8A255 /* LaunchScreen.storyboard */; };
+		05FB94731E21EE6500F4EF7B /* PhotoCaptureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FB94721E21EE6500F4EF7B /* PhotoCaptureDelegate.swift */; };
 		AB06F7173570C02A00E59C2C /* Pods_LongExposureVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3723D8FF682014B8060CE6 /* Pods_LongExposureVideo.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,9 +32,8 @@
 		0585FD9A1E186BDA0043071C /* UIImage+OpenCV.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIImage+OpenCV.mm"; sourceTree = "<group>"; };
 		0585FD9B1E186BDA0043071C /* UIImage+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Rotate.h"; sourceTree = "<group>"; };
 		0585FD9C1E186BDA0043071C /* UIImage+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rotate.m"; sourceTree = "<group>"; };
-		0585FD9F1E186BF90043071C /* stitching.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stitching.cpp; sourceTree = "<group>"; };
-		0585FDA01E186BF90043071C /* stitching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stitching.h; sourceTree = "<group>"; };
 		0585FDA21E19BCD40043071C /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		05B404221E21D076004B68F5 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		05D980131C8D4CBA00F8A255 /* LongExposureVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LongExposureVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05D980161C8D4CBA00F8A255 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05D980181C8D4CBA00F8A255 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -42,6 +41,7 @@
 		05D9801D1C8D4CBA00F8A255 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05D980201C8D4CBA00F8A255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		05D980221C8D4CBA00F8A255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05FB94721E21EE6500F4EF7B /* PhotoCaptureDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureDelegate.swift; sourceTree = "<group>"; };
 		09A3BBBC0A58C67852CE331B /* Pods-openShutterVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-openShutterVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-openShutterVideo/Pods-openShutterVideo.debug.xcconfig"; sourceTree = "<group>"; };
 		0A9124CA19C99B272346C386 /* Pods-LongExposureVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LongExposureVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LongExposureVideo/Pods-LongExposureVideo.debug.xcconfig"; sourceTree = "<group>"; };
 		3A3723D8FF682014B8060CE6 /* Pods_LongExposureVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LongExposureVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,8 +82,6 @@
 		05D980151C8D4CBA00F8A255 /* LongExposureVideo */ = {
 			isa = PBXGroup;
 			children = (
-				0585FD9F1E186BF90043071C /* stitching.cpp */,
-				0585FDA01E186BF90043071C /* stitching.h */,
 				0585FD991E186BDA0043071C /* UIImage+OpenCV.h */,
 				0585FD9A1E186BDA0043071C /* UIImage+OpenCV.mm */,
 				0585FD9B1E186BDA0043071C /* UIImage+Rotate.h */,
@@ -100,6 +98,8 @@
 				0585FDA21E19BCD40043071C /* CameraController.swift */,
 				057B116D1E1A3E420078725B /* openshutter.cpp */,
 				057B116E1E1A3E420078725B /* openshutter.hpp */,
+				05B404221E21D076004B68F5 /* PreviewView.swift */,
+				05FB94721E21EE6500F4EF7B /* PhotoCaptureDelegate.swift */,
 			);
 			path = LongExposureVideo;
 			sourceTree = "<group>";
@@ -249,13 +249,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0585FD9D1E186BDA0043071C /* UIImage+OpenCV.mm in Sources */,
+				05B404231E21D076004B68F5 /* PreviewView.swift in Sources */,
 				057B116F1E1A3E420078725B /* openshutter.cpp in Sources */,
 				0585FD961E1869A50043071C /* CVWrapper.mm in Sources */,
-				0585FDA31E19BCD40043071C /* CameraController.swift in Sources */,
 				05D980191C8D4CBA00F8A255 /* ViewController.swift in Sources */,
 				0585FD9E1E186BDA0043071C /* UIImage+Rotate.m in Sources */,
+				05FB94731E21EE6500F4EF7B /* PhotoCaptureDelegate.swift in Sources */,
 				05D980171C8D4CBA00F8A255 /* AppDelegate.swift in Sources */,
-				0585FDA11E186BF90043071C /* stitching.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +325,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -366,6 +367,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -387,8 +389,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LongExposureVideo/openShutterVideo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
-				TARGETED_DEVICE_FAMILY = 1;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -407,8 +409,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = LongExposureVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LongExposureVideo/openShutterVideo-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
-				TARGETED_DEVICE_FAMILY = 1;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

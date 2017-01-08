@@ -81,7 +81,8 @@ class CameraController: NSObject {
     private var session:AVCaptureSession!
     private var backCameraDevice:AVCaptureDevice?
     private var frontCameraDevice:AVCaptureDevice?
-    private var stillCameraOutput:AVCaptureStillImageOutput!
+//    private var stillCameraOutput:AVCaptureStillImageOutput!
+    private var stillCameraOutput:AVCapturePhotoOutput!
     private var movieFileOutput:AVCaptureMovieFileOutput!
     private var assetWriter:AVAssetWriter!
     private var videoOutput:AVCaptureVideoDataOutput!
@@ -173,6 +174,8 @@ class CameraController: NSObject {
         let outputURL = NSURL(fileURLWithPath: outputPath)
         let fileManager = NSFileManager.defaultManager()
         
+        var outputSize = CGSizeMake(1280, 720)
+        
         if !currentlyRecording {
             
             // Make sure we can save at the given url
@@ -187,34 +190,76 @@ class CameraController: NSObject {
             
             do {
                 self.assetWriter = try AVAssetWriter(URL: outputURL, fileType: AVFileTypeQuickTimeMovie)
-                let writerInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: nil)
+                let writerSettings = [
+                    AVVideoCodecKey: AVVideoCodecH264,
+                    AVVideoWidthKey: NSNumber(float: Float(outputSize.width)),
+                    AVVideoHeightKey: NSNumber(float: Float(outputSize.height))
+                ]
+                guard assetWriter.canApplyOutputSettings(writerSettings, forMediaType: AVMediaTypeVideo) else {
+                    fatalError("Negative : Can't apply the Output settings...")
+                }
+                
+                let sourcePixelBufferAttributesDictionary = [
+                    kCVPixelBufferPixelFormatTypeKey as String: NSNumber(unsignedInt: kCVPixelFormatType_32ARGB),
+                    kCVPixelBufferWidthKey as String: NSNumber(float: Float(outputSize.width)),
+                    kCVPixelBufferHeightKey as String: NSNumber(float: Float(outputSize.height))
+                ]
+                let writerInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: writerSettings)
                 writerInput.expectsMediaDataInRealTime = true
+                
+                let pixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(
+                    assetWriterInput: writerInput,
+                    sourcePixelBufferAttributes: sourcePixelBufferAttributesDictionary
+                )
                 
                 if assetWriter.canAddInput(writerInput) {
                     assetWriter.addInput(writerInput)
                 }
-
-//                let adaptor = AVAssetWriterInputPixelBufferAdaptor (
-//                    assetWriterInput: writerInput,
-//                    sourcePixelBufferAttributes: [
-//                        kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32ARGB),
-//                        kCVPixelBufferWidthKey as String: asset.size.width,
-//                        kCVPixelBufferHeightKey as String: asset.size.height,
-//                    ])
-                assetWriter.startWriting()
-                assetWriter.startSessionAtSourceTime(kCMTimeZero)
                 
-                writerInput.requestMediaDataWhenReadyOnQueue(dispatch_queue_create("VideoWriterQueue", DISPATCH_QUEUE_SERIAL)) {
-                    while writerInput.readyForMoreMediaData {
-                        if self.newSampleBufferExists {
-                            if let samplebuffer = self.currentSampleBuffer {
-                                writerInput.appendSampleBuffer(samplebuffer)
-                                self.currentSampleBuffer = nil
-                                self.newSampleBufferExists = false
+              
+
+                if assetWriter.startWriting() {
+                    assetWriter.startSessionAtSourceTime(kCMTimeZero)
+                    
+//                    let media_queue = dispatch_queue_create("mediaInputQueue", nil)
+                    
+                    writerInput.requestMediaDataWhenReadyOnQueue(dispatch_queue_create("VideoWriterQueue", DISPATCH_QUEUE_SERIAL)) {
+                        
+                        let fps: Int32 = 1
+                        let frameDuration = CMTimeMake(1, fps)
+                        
+                        var frameCount: Int64 = 0
+                        var appendSucceeded = true
+
+                        while writerInput.readyForMoreMediaData {
+                            if self.newSampleBufferExists {
+                                if let samplebuffer = self.currentSampleBuffer {
+                                    let lastFrameTime = CMTimeMake(frameCount, fps)
+                                    let presentationTime = frameCount == 0 ? lastFrameTime : CMTimeAdd(lastFrameTime, frameDuration)
+                                    
+//                                    writerInput.appendSampleBuffer(samplebuffer)
+                                    appendSucceeded = pixelBufferAdaptor.appendPixelBuffer(samplebuffer, withPresentationTime: presentationTime)
+
+                                    self.currentSampleBuffer = nil
+                                    self.newSampleBufferExists = false
+                                }
+                                frameCount += 1
                             }
                         }
                     }
                 }
+                
+//                writerInput.requestMediaDataWhenReadyOnQueue(dispatch_queue_create("VideoWriterQueue", DISPATCH_QUEUE_SERIAL)) {
+//                    while writerInput.readyForMoreMediaData {
+//                        if self.newSampleBufferExists {
+//                            if let samplebuffer = self.currentSampleBuffer {
+//                                writerInput.appendSampleBuffer(samplebuffer)
+//                                self.currentSampleBuffer = nil
+//                                self.newSampleBufferExists = false
+//                            }
+//                        }
+//                    }
+//                }
                 
                 currentlyRecording = true
                 print("recording")
@@ -225,13 +270,17 @@ class CameraController: NSObject {
         } else {
             // Stop recording
             assetWriter.inputs[0].markAsFinished()
-            assetWriter.endSessionAtSourceTime(CMTime(seconds: 10, preferredTimescale: 1))
+//            assetWriter.endSessionAtSourceTime(CMTime(seconds: 1, preferredTimescale: 1))
             assetWriter.finishWritingWithCompletionHandler({
                 UISaveVideoAtPathToSavedPhotosAlbum(outputPath, self, nil, nil)
-                print("1")
+                print("finished saving")
             })
             currentlyRecording = false
         }
+    }
+    
+    func didfinishsaving(videoPath: NSString, didFinishSavingWithError error: NSError, contextInfo: ()) {
+        
     }
     
     // MARK: - Camera Control
@@ -460,16 +509,19 @@ class CameraController: NSObject {
             connection.videoOrientation = AVCaptureVideoOrientation(rawValue: UIDevice.currentDevice().orientation.rawValue)!
             
             self.stillCameraOutput.captureStillImageAsynchronouslyFromConnection(connection) {
+            
                 (imageDataSampleBuffer, error) -> Void in
                 
                 if error == nil {
-                    let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
+//                    let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
+                    let imageData = AVCapturePhotoOutput.JPEGPhotoDataRepresentationForJPEGSampleBuffer(imageDataSampleBuffer, previewPhotoSampleBuffer: nil)
                     
                     let metadata: NSDictionary = CMCopyDictionaryOfAttachments(nil, imageDataSampleBuffer, CMAttachmentMode(kCMAttachmentMode_ShouldPropagate))!//.takeUnretainedValue()
-                    
-                    if let image = UIImage(data: imageData) {
-                        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                            handler(image: image, metadata:metadata)
+                    if let data = imageData {
+                        if let image = UIImage(data: data) {
+                            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                                handler(image: image, metadata:metadata)
+                            }
                         }
                     }
                 }
@@ -492,6 +544,12 @@ class CameraController: NSObject {
                 AVCaptureAutoExposureBracketedStillImageSettings.autoExposureSettingsWithExposureTargetBias(bias)
             }
             
+
+            let captureSettings = AVCapturePhotoSettings(format: [
+                AVVideoCodecKey  : AVVideoCodecJPEG,
+                AVVideoQualityKey: 0.9
+            ])
+            self.stillCameraOutput.capturePhotoWithSettings(captureSettings, delegate: self)
             self.stillCameraOutput.captureStillImageBracketAsynchronouslyFromConnection(connection, withSettingsArray: settings, completionHandler: {
                 (sampleBuffer, captureSettings, error) -> Void in
                 
@@ -558,7 +616,10 @@ class CameraController: NSObject {
 }
 
 // MARK: - Delegate methods
-extension CameraController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate {
+extension CameraController: AVCaptureMetadataOutputObjectsDelegate,
+                            AVCaptureVideoDataOutputSampleBufferDelegate,
+                            AVCaptureFileOutputRecordingDelegate,
+                            AVCapturePhotoCaptureDelegate {
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
 //        var faces = Array<(id:Int,frame:CGRect)>()
@@ -687,12 +748,12 @@ private extension CameraController {
     func configureDeviceInput() {
         performConfiguration { () -> Void in
             
-            let availableCameraDevices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
-            for device in availableCameraDevices as! [AVCaptureDevice] {
+            let targetTypes = [AVCaptureDeviceTypeBuiltInWideAngleCamera]
+            let discoverySession = AVCaptureDeviceDiscoverySession(deviceTypes: targetTypes, mediaType: AVMediaTypeVideo, position: .Front)
+            for device in discoverySession.devices {
                 if device.position == .Back {
                     self.backCameraDevice = device
-                }
-                else if device.position == .Front {
+                } else if device.position == .Front {
                     self.frontCameraDevice = device
                 }
             }
@@ -713,11 +774,12 @@ private extension CameraController {
     
     func configureStillImageCameraOutput() {
         performConfiguration { () -> Void in
-            self.stillCameraOutput = AVCaptureStillImageOutput()
-            self.stillCameraOutput.outputSettings = [
-                AVVideoCodecKey  : AVVideoCodecJPEG,
-                AVVideoQualityKey: 0.9
-            ]
+//            self.stillCameraOutput = AVCaptureStillImageOutput()
+//            self.stillCameraOutput.outputSettings = [
+//                AVVideoCodecKey  : AVVideoCodecJPEG,
+//                AVVideoQualityKey: 0.9
+//            ]
+            self.stillCameraOutput = AVCapturePhotoOutput()
             
             if self.session.canAddOutput(self.stillCameraOutput) {
                 self.session.addOutput(self.stillCameraOutput)

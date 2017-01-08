@@ -28,6 +28,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>give me access!</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>do it</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>do it</string>
 	<key>UILaunchStoryboardName</key>
@@ -41,6 +43,9 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
