@@ -252,15 +252,13 @@ class ViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
                     
                     self.previewView.videoPreviewLayer.connection.videoOrientation = initialVideoOrientation
                 }
-            }
-            else {
+            } else {
                 print("Could not add video device input to the session")
                 setupResult = .configurationFailed
                 session.commitConfiguration()
                 return
             }
-        }
-        catch {
+        } catch {
             print("Could not create video device input: \(error)")
             setupResult = .configurationFailed
             session.commitConfiguration()
@@ -274,25 +272,21 @@ class ViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
             
             if session.canAddInput(audioDeviceInput) {
                 session.addInput(audioDeviceInput)
-            }
-            else {
+            } else {
                 print("Could not add audio device input to the session")
             }
-        }
-        catch {
+        } catch {
             print("Could not create audio device input: \(error)")
         }
         
         // Add photo output.
-        if session.canAddOutput(photoOutput)
-        {
+        if session.canAddOutput(photoOutput) {
             session.addOutput(photoOutput)
             
             photoOutput.isHighResolutionCaptureEnabled = true
             photoOutput.isLivePhotoCaptureEnabled = photoOutput.isLivePhotoCaptureSupported
             livePhotoMode = photoOutput.isLivePhotoCaptureSupported ? .on : .off
-        }
-        else {
+        } else {
             print("Could not add photo output to the session")
             setupResult = .configurationFailed
             session.commitConfiguration()
@@ -302,8 +296,7 @@ class ViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
         session.commitConfiguration()
     }
 
-    @IBAction private func resumeInterruptedSession(_ resumeButton: UIButton)
-    {
+    @IBAction private func resumeInterruptedSession(_ resumeButton: UIButton) {
         sessionQueue.async { [unowned self] in
             /*
              The session might fail to start running, e.g., if a phone or FaceTime call is still
@@ -322,8 +315,7 @@ class ViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
                     alertController.addAction(cancelAction)
                     self.present(alertController, animated: true, completion: nil)
                 }
-            }
-            else {
+            } else {
                 DispatchQueue.main.async { [unowned self] in
                     self.resumeButton.isHidden = true
                 }
@@ -357,9 +349,7 @@ class ViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
                     }
                 }
             }
-        }
-        else if captureModeControl.selectedSegmentIndex == CaptureMode.movie.rawValue
-        {
+        } else if captureModeControl.selectedSegmentIndex == CaptureMode.movie.rawValue {
             livePhotoModeButton.isHidden = true
             
             sessionQueue.async { [unowned self] in
