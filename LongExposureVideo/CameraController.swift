@@ -580,17 +580,31 @@ extension CameraController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVid
     }
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
+        // use long exposure
+        /*
         currentSampleBuffer = sampleBuffer
         newSampleBufferExists = true
         let uiimage = uiimageFromSampleBuffer(sampleBuffer)
-//        var ocvimage = CVWrapper.processImageWithOpenCV(uiimage)
-//        if self.currentCameraDevice?.position == .Front {
-//            ocvimage = UIImage(CGImage: ocvimage.CGImage!, scale: ocvimage.scale, orientation: .LeftMirrored)
-//        }
+        var ocvimage = CVWrapper.processImageWithOpenCV(uiimage)
+        if self.currentCameraDevice?.position == .Front {
+            ocvimage = UIImage(CGImage: ocvimage.CGImage!, scale: ocvimage.scale, orientation: .LeftMirrored)
+        }
+        let ciimage = CIImage(image: ocvimage)
+        if ciimage != nil {
+            self.delegate?.cameraController(self, didOutputImage: ciimage!)
+        }
+        // */
+        
+        // do not use long exposure
+        ///*
+        currentSampleBuffer = sampleBuffer
+        newSampleBufferExists = true
+        let uiimage = uiimageFromSampleBuffer(sampleBuffer)
         let ciimage = CIImage(image: uiimage)
         if ciimage != nil {
             self.delegate?.cameraController(self, didOutputImage: ciimage!)
         }
+        // */
     }
     
     func uiimageFromSampleBuffer(sampleBuffer : CMSampleBuffer) -> UIImage {
