@@ -10,12 +10,13 @@ import UIKit
 import AVFoundation
 import GLKit
 
-class ViewController: UIViewController, CameraControllerDelegate {
+class ViewController: UIViewController {
 
     @IBOutlet weak var videoPreviewView: UIView!
     @IBOutlet weak var swapCameraButton: UIButton!
     @IBOutlet weak var recordVideoButton: UIButton!
-    
+    @IBOutlet weak var isoSlider: UISlider!
+
     var glContext: EAGLContext?
     var ciContext: CIContext?
     var renderBuffer: GLuint = GLuint()
@@ -57,7 +58,16 @@ class ViewController: UIViewController, CameraControllerDelegate {
         cameraController.toggleRecording()
     }
     
-    // MARK: - CameraControllerDelegate
+    @IBAction func sliderValueChanged(sender: UISlider) {
+        switch sender {
+        case isoSlider:
+            cameraController?.setCustomExposureWithISO(sender.value)
+        default: break
+        }
+    }
+}
+
+extension ViewController: CameraControllerDelegate {
     func cameraController(cameraController: CameraController, didDetectFaces faces:Array<(id:Int,frame:CGRect)>) { }
     
     func cameraController(cameraController: CameraController, didOutputImage image: CIImage) {
