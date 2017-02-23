@@ -8,19 +8,22 @@
 
 #include "openshutter.hpp"
 
-Mat ims [10];
+int maxFrameCount = 20;
+Mat ims[20];
 int framecount = 0;
+
 
 Mat openshutter(Mat i0) {
     
+    
     // shift the image array over one index
-    for (int i=9; i>0; i--) {
+    for (int i=maxFrameCount-1; i>0; i--) {
         ims[i] = ims[i-1];
     }
     ims[0] = i0;
     
     // if the image array is not full, return the initial image
-    if (framecount < 10) {
+    if (framecount < maxFrameCount) {
         ++framecount;
         return i0;
     }
@@ -29,8 +32,9 @@ Mat openshutter(Mat i0) {
     Mat combo = Mat(i0.rows, i0.cols, i0.type(), double(0));
     
     // calculate the combination frame
-    for (int i=0; i<10; i++) {
-        double denom = 2*(i+1);
+    for (int i=0; i<maxFrameCount; i++) {
+//        float denom = 2*(i+1);
+        float denom = 1;
         scaleAdd(ims[i], 1/denom, combo, combo);
     }
     
