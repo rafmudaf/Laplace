@@ -331,20 +331,21 @@ class CameraController: NSObject {
     
     func setCustomExposureWithISO(iso:Float) {
         performConfigurationOnCurrentCameraDevice { (currentDevice) -> Void in
-            currentDevice.setExposureModeCustomWithDuration(AVCaptureExposureDurationCurrent, ISO: iso, completionHandler: nil)
+            let activeFormat = currentDevice.activeFormat
+            let isoScaled = iso*(activeFormat.maxISO-activeFormat.minISO)+activeFormat.minISO
+            currentDevice.setExposureModeCustomWithDuration(AVCaptureExposureDurationCurrent, ISO: isoScaled, completionHandler: nil)
         }
     }
     
     func setCustomExposureWithDuration(duration:Float) {
         performConfigurationOnCurrentCameraDevice { (currentDevice) -> Void in
-//            let activeFormat = currentDevice.activeFormat
-//            let finalDuration = CMTimeMakeWithSeconds(Float64(duration), 1_000_000)
-//            let durationRange = CMTimeRangeFromTimeToTime(activeFormat.minExposureDuration, activeFormat.maxExposureDuration)
+            let activeFormat = currentDevice.activeFormat
+            let finalDuration = CMTimeMakeWithSeconds(Float64(duration), 1_000_000)
+            let durationRange = CMTimeRangeFromTimeToTime(activeFormat.minExposureDuration, activeFormat.maxExposureDuration)
             
-//            let x = CMTimeRangeContainsTime(durationRange, finalDuration)
-//			if CMTimeRangeContainsTime(durationRange, finalDuration) != 0 {
-//				currentDevice.setExposureModeCustomWithDuration(finalDuration, ISO: AVCaptureISOCurrent, completionHandler: nil)
-//			}
+            if CMTimeRangeContainsTime(durationRange, finalDuration) {
+                currentDevice.setExposureModeCustomWithDuration(finalDuration, ISO: AVCaptureISOCurrent, completionHandler: nil)
+            }
         }
     }
     
@@ -581,7 +582,7 @@ extension CameraController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVid
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
         // use long exposure
-        /*
+        //*
         currentSampleBuffer = sampleBuffer
         newSampleBufferExists = true
         let uiimage = uiimageFromSampleBuffer(sampleBuffer)
@@ -596,7 +597,7 @@ extension CameraController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVid
         // */
         
         // do not use long exposure
-        ///*
+        /*
         currentSampleBuffer = sampleBuffer
         newSampleBufferExists = true
         let uiimage = uiimageFromSampleBuffer(sampleBuffer)
