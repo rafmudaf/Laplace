@@ -12,9 +12,7 @@ int maxFrameCount = 20;
 Mat ims[20];
 int framecount = 0;
 
-
 Mat openshutter(Mat i0) {
-    
     
     // shift the image array over one index
     for (int i=maxFrameCount-1; i>0; i--) {
@@ -34,7 +32,7 @@ Mat openshutter(Mat i0) {
     // calculate the combination frame
     for (int i=0; i<maxFrameCount; i++) {
 //        float denom = 2*(i+1);
-        float denom = 1;
+        float denom = 2;
         scaleAdd(ims[i], 1/denom, combo, combo);
     }
     
