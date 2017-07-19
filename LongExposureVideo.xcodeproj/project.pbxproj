@@ -10,7 +10,6 @@
 		057B116F1E1A3E420078725B /* openshutter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057B116D1E1A3E420078725B /* openshutter.cpp */; };
 		0585FD961E1869A50043071C /* CVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD951E1869A50043071C /* CVWrapper.mm */; };
 		0585FD9D1E186BDA0043071C /* UIImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD9A1E186BDA0043071C /* UIImage+OpenCV.mm */; };
-		0585FD9E1E186BDA0043071C /* UIImage+Rotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD9C1E186BDA0043071C /* UIImage+Rotate.m */; };
 		05B404231E21D076004B68F5 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B404221E21D076004B68F5 /* PreviewView.swift */; };
 		05D980171C8D4CBA00F8A255 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D980161C8D4CBA00F8A255 /* AppDelegate.swift */; };
 		05D980191C8D4CBA00F8A255 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D980181C8D4CBA00F8A255 /* ViewController.swift */; };
@@ -30,8 +29,6 @@
 		0585FD951E1869A50043071C /* CVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVWrapper.mm; sourceTree = "<group>"; };
 		0585FD991E186BDA0043071C /* UIImage+OpenCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+OpenCV.h"; sourceTree = "<group>"; };
 		0585FD9A1E186BDA0043071C /* UIImage+OpenCV.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIImage+OpenCV.mm"; sourceTree = "<group>"; };
-		0585FD9B1E186BDA0043071C /* UIImage+Rotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Rotate.h"; sourceTree = "<group>"; };
-		0585FD9C1E186BDA0043071C /* UIImage+Rotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rotate.m"; sourceTree = "<group>"; };
 		0585FDA21E19BCD40043071C /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		05B404221E21D076004B68F5 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		05D980131C8D4CBA00F8A255 /* LongExposureVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LongExposureVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,10 +79,6 @@
 		05D980151C8D4CBA00F8A255 /* LongExposureVideo */ = {
 			isa = PBXGroup;
 			children = (
-				0585FD991E186BDA0043071C /* UIImage+OpenCV.h */,
-				0585FD9A1E186BDA0043071C /* UIImage+OpenCV.mm */,
-				0585FD9B1E186BDA0043071C /* UIImage+Rotate.h */,
-				0585FD9C1E186BDA0043071C /* UIImage+Rotate.m */,
 				05D980161C8D4CBA00F8A255 /* AppDelegate.swift */,
 				05D980181C8D4CBA00F8A255 /* ViewController.swift */,
 				05D9801A1C8D4CBA00F8A255 /* Main.storyboard */,
@@ -253,7 +246,6 @@
 				057B116F1E1A3E420078725B /* openshutter.cpp in Sources */,
 				0585FD961E1869A50043071C /* CVWrapper.mm in Sources */,
 				05D980191C8D4CBA00F8A255 /* ViewController.swift in Sources */,
-				0585FD9E1E186BDA0043071C /* UIImage+Rotate.m in Sources */,
 				05FB94731E21EE6500F4EF7B /* PhotoCaptureDelegate.swift in Sources */,
 				05D980171C8D4CBA00F8A255 /* AppDelegate.swift in Sources */,
 			);

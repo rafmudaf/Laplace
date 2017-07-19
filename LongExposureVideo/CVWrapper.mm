@@ -8,7 +8,6 @@
 
 #import "CVWrapper.h"
 #import "UIImage+OpenCV.h"
-#import "UIImage+Rotate.h"
 #import "openshutter.hpp"
 
 #include <opencv2/imgcodecs.hpp>
