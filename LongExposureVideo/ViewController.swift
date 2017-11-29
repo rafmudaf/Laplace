@@ -29,10 +29,10 @@ class ViewController: UIViewController {
         
         cameraController = CameraController(previewType: .Manual, delegate: self)
         
-        glContext = EAGLContext(API: .OpenGLES2)
+        glContext = EAGLContext(api: .openGLES2)
         glView = GLKView(frame: videoPreviewView.frame, context: glContext!)
         
-        glView!.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+        glView!.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))
         
         // what does this do?
 //        if let window = glView!.window {
@@ -41,11 +41,11 @@ class ViewController: UIViewController {
         
         glView!.frame = videoPreviewView.frame
         
-        ciContext = CIContext(EAGLContext: glContext!)
+        ciContext = CIContext(eaglContext: glContext!)
         videoPreviewView.addSubview(glView!)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cameraController.startRunning()
     }
@@ -61,7 +61,7 @@ class ViewController: UIViewController {
     @IBAction func sliderValueChanged(sender: UISlider) {
         switch sender {
         case isoSlider:
-            cameraController?.setCustomExposureWithISO(sender.value)
+            cameraController?.setCustomExposureWithISO(iso: sender.value)
         default: break
         }
     }
@@ -71,11 +71,11 @@ extension ViewController: CameraControllerDelegate {
     func cameraController(cameraController: CameraController, didDetectFaces faces:Array<(id:Int,frame:CGRect)>) { }
     
     func cameraController(cameraController: CameraController, didOutputImage image: CIImage) {
-        if glContext != EAGLContext.currentContext() {
-            EAGLContext.setCurrentContext(glContext)
+        if glContext != EAGLContext.current() {
+            EAGLContext.setCurrent(glContext)
         }
         glView!.bindDrawable()
-        ciContext?.drawImage(image, inRect: image.extent, fromRect: image.extent)
+        ciContext?.draw(image, in: image.extent, from: image.extent)
         glView!.display()
     }
 }

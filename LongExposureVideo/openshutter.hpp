@@ -23,5 +23,6 @@ using namespace std;
 
 Mat openshutter(Mat i0);
 Mat lastframe();
+Mat mod_laplace(Mat image);
 
 #endif /* openshutter_hpp */

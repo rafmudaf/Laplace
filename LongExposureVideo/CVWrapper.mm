@@ -20,8 +20,10 @@
 
 + (UIImage*) processImageWithOpenCV: (UIImage*) inputImage {
     Mat mat;
+    Mat matout;
     UIImageToMat(inputImage, mat, true);
-    Mat openMat = openshutter(mat);
+//    Mat openMat = openshutter(mat);
+    Mat openMat = mod_laplace(mat);
     UIImage* result = MatToUIImage(openMat);
     return result;
 }
