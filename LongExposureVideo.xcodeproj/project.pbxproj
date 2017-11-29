@@ -79,22 +79,40 @@
 		05D980151C8D4CBA00F8A255 /* LongExposureVideo */ = {
 			isa = PBXGroup;
 			children = (
-				05D980161C8D4CBA00F8A255 /* AppDelegate.swift */,
+				05EADE0C1E9DD8DB0037F841 /* Application */,
+				05EADE0B1E9DD8A60037F841 /* OpenCV */,
 				05D980181C8D4CBA00F8A255 /* ViewController.swift */,
 				05D9801A1C8D4CBA00F8A255 /* Main.storyboard */,
-				05D9801D1C8D4CBA00F8A255 /* Assets.xcassets */,
-				05D9801F1C8D4CBA00F8A255 /* LaunchScreen.storyboard */,
-				05D980221C8D4CBA00F8A255 /* Info.plist */,
-				0585FD941E1868E10043071C /* CVWrapper.h */,
-				0585FD951E1869A50043071C /* CVWrapper.mm */,
 				0585FD931E1868B00043071C /* openShutterVideo-Bridging-Header.h */,
 				0585FDA21E19BCD40043071C /* CameraController.swift */,
-				057B116D1E1A3E420078725B /* openshutter.cpp */,
-				057B116E1E1A3E420078725B /* openshutter.hpp */,
 				05B404221E21D076004B68F5 /* PreviewView.swift */,
 				05FB94721E21EE6500F4EF7B /* PhotoCaptureDelegate.swift */,
 			);
 			path = LongExposureVideo;
+			sourceTree = "<group>";
+		};
+		05EADE0B1E9DD8A60037F841 /* OpenCV */ = {
+			isa = PBXGroup;
+			children = (
+				0585FD991E186BDA0043071C /* UIImage+OpenCV.h */,
+				0585FD9A1E186BDA0043071C /* UIImage+OpenCV.mm */,
+				057B116D1E1A3E420078725B /* openshutter.cpp */,
+				057B116E1E1A3E420078725B /* openshutter.hpp */,
+				0585FD941E1868E10043071C /* CVWrapper.h */,
+				0585FD951E1869A50043071C /* CVWrapper.mm */,
+			);
+			name = OpenCV;
+			sourceTree = "<group>";
+		};
+		05EADE0C1E9DD8DB0037F841 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				05D9801D1C8D4CBA00F8A255 /* Assets.xcassets */,
+				05D980221C8D4CBA00F8A255 /* Info.plist */,
+				05D9801F1C8D4CBA00F8A255 /* LaunchScreen.storyboard */,
+				05D980161C8D4CBA00F8A255 /* AppDelegate.swift */,
+			);
+			name = Application;
 			sourceTree = "<group>";
 		};
 		0C37121B526784B186D229FD /* Frameworks */ = {
