@@ -25,31 +25,37 @@ class CameraController: NSObject {
     var newSampleBufferExists = false
     var currentlyRecording = false
     
-    var currentCameraDevice: AVCaptureDevice?
+    let assetManager = AssetManager()
     
+    // AVCapture variables
     var sessionQueue = DispatchQueue(label: "session_access_queue")
+    var currentCameraDevice: AVCaptureDevice?
     var session: AVCaptureSession!
     var backCameraDevice: AVCaptureDevice?
     var frontCameraDevice: AVCaptureDevice?
-//    var stillCameraOutput: AVCaptureStillImageOutput!
-    var stillCameraOutput = AVCapturePhotoOutput()
+    var stillCameraOutput: AVCapturePhotoOutput!
     var movieFileOutput: AVCaptureMovieFileOutput!
     var assetWriter: AVAssetWriter!
     var videoOutput: AVCaptureVideoDataOutput!
     var metadataOutput: AVCaptureMetadataOutput!
     
-    let assetManager = AssetManager()
+    // Metal variables
+    var device: MTLDevice!
+    var defaultLibrary: MTLLibrary!
+    var commandQueue: MTLCommandQueue?
+    var commandBuffer: MTLCommandBuffer?
+    var commandEncoder: MTLComputeCommandEncoder!
     
     required init(delegate: CameraControllerDelegate) {
         self.delegate = delegate
-        
         super.init()
-        
         initializeSession()
-//        initializeMetal()
+        initializeMetal()
     }
     
     func initializeSession() {
+        
+        stillCameraOutput = AVCapturePhotoOutput()
         
         session = AVCaptureSession()
         if session.canSetSessionPreset(AVCaptureSession.Preset.hd1280x720) {
@@ -76,28 +82,20 @@ class CameraController: NSObject {
     }
     
     func initializeMetal() {
-//        let device: MTLDevice! = MTLCreateSystemDefaultDevice()
-//        var defaultLibrary = device.newDefaultLibrary()
-//        let kernelFunction = defaultLibrary?.makeFunction(name: "squareValueShader")
-//        do {
-//            var pipelineState = try device.makeComputePipelineState(function: kernelFunction!)
-//        } catch {
-//            return
-//        }
-//
-//        var commandQueue = device.makeCommandQueue()
-//        let commandBuffer = commandQueue.makeCommandBuffer()
-//        let commandEncoder = commandBuffer.makeComputeCommandEncoder()
-        
-//        let valueByteLength = inputarray.count*MemoryLayout.size(ofValue: inputarray[0])
-//        
-//        // add the input array to the metal buffer
-//        var inVectorBuffer = device.makeBuffer(bytes: &inputarray, length: valueByteLength, options: .storageModeShared)
-//        commandEncoder.setBuffer(inVectorBuffer, offset: 0, index: 0)
-//        
-//        // add the output array to the metal buffer
-//        var outVectorBuffer = device.makeBuffer(bytes: &resultarray, length: valueByteLength, options: .storageModeShared)
-//        commandEncoder.setBuffer(outVectorBuffer, offset: 0, index: 1)
+        device = MTLCreateSystemDefaultDevice()
+        defaultLibrary = device.makeDefaultLibrary()
+        commandQueue = device.makeCommandQueue()
+        guard let queue = commandQueue else {
+            print("Metal could not create command queue")
+            return
+        }
+        commandBuffer = queue.makeCommandBuffer()
+        guard let buffer = commandBuffer else {
+            print("Metal could not create command buffer")
+            return
+        }
+        commandEncoder = buffer.makeComputeCommandEncoder()
+        configureMetal()
     }
     
     func startRunning() {
@@ -134,7 +132,6 @@ class CameraController: NSObject {
             self.currentCameraDevice = self.backCameraDevice
         }
         
-        // Swap cameras
         session.beginConfiguration()
         session.removeInput(currentCameraInput)
         do {
@@ -153,9 +150,9 @@ class CameraController: NSObject {
         let outputPath = String(format: "%@%@", NSTemporaryDirectory(), "output.mov")
         let outputURL = NSURL(fileURLWithPath: outputPath)
         let fileManager = FileManager.default
-        
+
         if !currentlyRecording {
-            
+
             // Make sure we can save at the given url
             if fileManager.fileExists(atPath: outputPath) {
                 do {
@@ -165,12 +162,12 @@ class CameraController: NSObject {
                     print("error removing item at path \(outputPath): \(error)")
                 }
             }
-            
+
             do {
                 self.assetWriter = try AVAssetWriter(outputURL: outputURL as URL, fileType: AVFileType.mov)
                 let writerInput = AVAssetWriterInput(mediaType: AVMediaType.video, outputSettings: nil)
                 writerInput.expectsMediaDataInRealTime = true
-                
+
                 if assetWriter.canAdd(writerInput) {
                     assetWriter.add(writerInput)
                 }
@@ -184,7 +181,7 @@ class CameraController: NSObject {
 //                    ])
                 assetWriter.startWriting()
                 assetWriter.startSession(atSourceTime: kCMTimeZero)
-                
+
                 writerInput.requestMediaDataWhenReady(on: DispatchQueue(label: "VideoWriterQueue")) {
                     while writerInput.isReadyForMoreMediaData {
                         if self.newSampleBufferExists {
@@ -196,12 +193,11 @@ class CameraController: NSObject {
                         }
                     }
                 }
-                
+
                 currentlyRecording = true
-                print("recording")
-                
+
             } catch {
-                
+
             }
         } else {
             // Stop recording
@@ -216,10 +212,6 @@ class CameraController: NSObject {
     
     func captureStillImage(completionHandler handler: @escaping ((_ image: UIImage, _ metadata: NSDictionary) -> Void)) {
         sessionQueue.async() { () -> Void in
-//            guard let connection = self.stillCameraOutput.connection(withMediaType: AVMediaTypeVideo) else {
-//                return
-//            }
-//            connection.videoOrientation = AVCaptureVideoOrientation(rawValue: UIDevice.current.orientation.rawValue)!
             self.stillCameraOutput.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
         }
     }
@@ -323,32 +315,19 @@ extension CameraController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVid
     }
 }
 
-// MARK: - Private
+// configuration methods
 private extension CameraController {
+
     func performConfiguration(block: @escaping (() -> Void)) {
         sessionQueue.async() { () -> Void in
             block()
         }
     }
     
-    func performConfigurationOnCurrentCameraDevice(block: @escaping ((_ currentDevice: AVCaptureDevice) -> Void)) {
-        if let currentDevice = self.currentCameraDevice {
-            performConfiguration { () -> Void in
-                do {
-                    try currentDevice.lockForConfiguration()
-                    block(currentDevice)
-                    currentDevice.unlockForConfiguration()
-                } catch {
-                    print("error in performConfigurationOnCurrentCameraDevice")
-                }
-            }
-        }
-    }
-    
     func configureSession() {
         configureDeviceInput()
         configureStillImageCameraOutput()
-//        configureMovieOutput()
+        //        configureMovieOutput()
         configureVideoOutput()
     }
     
@@ -395,11 +374,6 @@ private extension CameraController {
     
     func configureStillImageCameraOutput() {
         performConfiguration { () -> Void in
-//            self.stillCameraOutput = AVCaptureStillImageOutput()
-//            self.stillCameraOutput.outputSettings = [
-//                AVVideoCodecKey  : AVVideoCodecJPEG,
-//                AVVideoQualityKey: 0.9
-//            ]
             if self.session.canAddOutput(self.stillCameraOutput) {
                 self.session.addOutput(self.stillCameraOutput)
             }
@@ -425,5 +399,23 @@ private extension CameraController {
                 self.session.addOutput(self.movieFileOutput)
             }
         }
+    }
+    
+    func configureMetal() {
+//        let kernelFunction = defaultLibrary?.makeFunction(name: "squareValueShader")
+//        do {
+//            var pipelineState = try device.makeComputePipelineState(function: kernelFunction!)
+//        } catch {
+//            return
+//        }
+//        let valueByteLength = inputarray.count*MemoryLayout.size(ofValue: inputarray[0])
+//
+//        // add the input array to the metal buffer
+//        var inVectorBuffer = device.makeBuffer(bytes: &inputarray, length: valueByteLength, options: .storageModeShared)
+//        commandEncoder.setBuffer(inVectorBuffer, offset: 0, index: 0)
+//
+//        // add the output array to the metal buffer
+//        var outVectorBuffer = device.makeBuffer(bytes: &resultarray, length: valueByteLength, options: .storageModeShared)
+//        commandEncoder.setBuffer(outVectorBuffer, offset: 0, index: 1)
     }
 }
