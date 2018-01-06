@@ -52,15 +52,15 @@ class CameraController: NSObject {
     func initializeSession() {
         
         session = AVCaptureSession()
-        if session.canSetSessionPreset(AVCaptureSessionPreset1280x720) {
-            session.sessionPreset = AVCaptureSessionPreset1280x720
+        if session.canSetSessionPreset(AVCaptureSession.Preset.hd1280x720) {
+            session.sessionPreset = AVCaptureSession.Preset.hd1280x720
         }
         
-        let authorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        let authorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         
         switch authorizationStatus {
         case .notDetermined:
-            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { (granted: Bool) -> Void in
+            AVCaptureDevice.requestAccess(for: AVMediaType.video) { (granted: Bool) -> Void in
                 if granted {
                     self.configureSession()
                 }
@@ -113,28 +113,39 @@ class CameraController: NSObject {
     }
     
     func switchCamera() {
-        if session != nil {
-            
-            let currentCameraInput = session.inputs.first as! AVCaptureInput
-            if self.currentCameraDevice?.position == .back {
-                self.currentCameraDevice = self.frontCameraDevice
-            } else if self.currentCameraDevice?.position == .front {
-                self.currentCameraDevice = self.backCameraDevice
-            }
-            
-            // Swap cameras
-            session.beginConfiguration()
-            session.removeInput(currentCameraInput)
-            do {
-                let possibleCameraInput = try AVCaptureDeviceInput(device: self.currentCameraDevice)
-                if self.session.canAddInput(possibleCameraInput) {
-                    self.session.addInput(possibleCameraInput)
-                }
-            } catch {
-                print("error capturing the device \(error)")
-            }
-            session.commitConfiguration()
+        guard let session = session else {
+            print("error switching the camera: AVCaptureSession is nil")
+            return
         }
+        
+        guard let currentCameraInput = session.inputs.first else {
+            print("error switching the camera: session input is nil")
+            return
+        }
+        
+        guard let device = self.currentCameraDevice else {
+            print("error switching the camera: camera device is nil")
+            return
+        }
+
+        if device.position == .back {
+            self.currentCameraDevice = self.frontCameraDevice
+        } else if device.position == .front {
+            self.currentCameraDevice = self.backCameraDevice
+        }
+        
+        // Swap cameras
+        session.beginConfiguration()
+        session.removeInput(currentCameraInput)
+        do {
+            let possibleCameraInput = try AVCaptureDeviceInput(device: self.currentCameraDevice!)
+            if self.session.canAddInput(possibleCameraInput) {
+                self.session.addInput(possibleCameraInput)
+            }
+        } catch {
+            print("error capturing the device \(error)")
+        }
+        session.commitConfiguration()
     }
     
     func toggleRecording() {
@@ -156,8 +167,8 @@ class CameraController: NSObject {
             }
             
             do {
-                self.assetWriter = try AVAssetWriter(outputURL: outputURL as URL, fileType: AVFileTypeQuickTimeMovie)
-                let writerInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: nil)
+                self.assetWriter = try AVAssetWriter(outputURL: outputURL as URL, fileType: AVFileType.mov)
+                let writerInput = AVAssetWriterInput(mediaType: AVMediaType.video, outputSettings: nil)
                 writerInput.expectsMediaDataInRealTime = true
                 
                 if assetWriter.canAdd(writerInput) {
@@ -215,7 +226,7 @@ class CameraController: NSObject {
 }
 
 extension CameraController: AVCapturePhotoCaptureDelegate {
-    func capture(_ output: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photo: CMSampleBuffer?, previewPhotoSampleBuffer previewPhoto: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: CMSampleBuffer?, previewPhoto: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
         guard error == nil, let sampleBuffer = photo else {
             print("error in didFinishProcessingPhotoSampleBuffer")
             return
@@ -242,11 +253,11 @@ extension CameraController: AVCapturePhotoCaptureDelegate {
 }
 
 extension CameraController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate {
-    func capture(_ output: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         return
     }
     
-    internal func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
+    internal func captureOutput(_ captureOutput: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         currentSampleBuffer = sampleBuffer
         newSampleBufferExists = true
         guard let uiimage = uiimageFromSampleBuffer(sampleBuffer: sampleBuffer) else {
@@ -344,26 +355,34 @@ private extension CameraController {
     func configureDeviceInput() {
         performConfiguration { () -> Void in
             
-            let deviceTypes: [AVCaptureDeviceType] = [.builtInWideAngleCamera]
-            let mediaType = AVMediaTypeVideo
-            let position = AVCaptureDevicePosition.back
-            guard let discovery = AVCaptureDeviceDiscoverySession(deviceTypes: deviceTypes, mediaType: mediaType, position: position) else {
-                return
-            }
+            // start the device configuration
+            let deviceTypes: [AVCaptureDevice.DeviceType] = [AVCaptureDevice.DeviceType.builtInWideAngleCamera]
+            let mediaType = AVMediaType.video
+            var position: AVCaptureDevice.Position
+            var discovery: AVCaptureDevice.DiscoverySession
             
+            // configure the rear camera
+            position = .back
+            discovery = AVCaptureDevice.DiscoverySession(deviceTypes: deviceTypes, mediaType: mediaType, position: position)
             for device in discovery.devices {
                 if device.position == .back {
                     self.backCameraDevice = device
                 }
-                else if device.position == .front {
+            }
+            
+            // configure the front camera
+            position = .front
+            discovery = AVCaptureDevice.DiscoverySession(deviceTypes: deviceTypes, mediaType: mediaType, position: position)
+            for device in discovery.devices {
+                if device.position == .front {
                     self.frontCameraDevice = device
                 }
             }
             
-            // let's set the back camera as the initial device
+            // set the back camera as the initial device
             self.currentCameraDevice = self.backCameraDevice
             do {
-                let possibleCameraInput = try AVCaptureDeviceInput(device: self.currentCameraDevice)
+                let possibleCameraInput = try AVCaptureDeviceInput(device: self.currentCameraDevice!)
                 let backCameraInput = possibleCameraInput
                 if self.session.canAddInput(backCameraInput) {
                     self.session.addInput(backCameraInput)
@@ -390,7 +409,7 @@ private extension CameraController {
     func configureVideoOutput() {
         performConfiguration { () -> Void in
             self.videoOutput = AVCaptureVideoDataOutput()
-            self.videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as NSString: Int(kCVPixelFormatType_32BGRA)]
+            self.videoOutput.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString) as String: Int(kCVPixelFormatType_32BGRA)]
             self.videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "VideoDataOutputQueue"))
             if self.session.canAddOutput(self.videoOutput) {
                 self.session.addOutput(self.videoOutput)
