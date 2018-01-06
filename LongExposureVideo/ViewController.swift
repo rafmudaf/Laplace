@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  openShutterVideo
+//  LongExposureVideo
 //
 //  Created by Rafael M Mudafort on 3/6/16.
 //  Copyright © 2016 Rafael M Mudafort. All rights reserved.
@@ -15,7 +15,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var videoPreviewView: UIView!
     @IBOutlet weak var swapCameraButton: UIButton!
     @IBOutlet weak var recordVideoButton: UIButton!
-    @IBOutlet weak var isoSlider: UISlider!
 
     var glContext: EAGLContext?
     var ciContext: CIContext?
@@ -27,20 +26,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cameraController = CameraController(previewType: .Manual, delegate: self)
+        cameraController = CameraController(delegate: self)
         
         glContext = EAGLContext(api: .openGLES2)
         glView = GLKView(frame: videoPreviewView.frame, context: glContext!)
-        
         glView!.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))
         
         // what does this do?
-//        if let window = glView!.window {
-//            glView!.frame = window.bounds
-//        }
+        /*
+        if let window = glView!.window {
+            glView!.frame = window.bounds
+        }
+        */
         
         glView!.frame = videoPreviewView.frame
-        
         ciContext = CIContext(eaglContext: glContext!)
         videoPreviewView.addSubview(glView!)
     }
@@ -55,21 +54,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func recordVideoButtonClicked(sender: AnyObject) {
-        cameraController.toggleRecording()
-    }
-    
-    @IBAction func sliderValueChanged(sender: UISlider) {
-        switch sender {
-        case isoSlider:
-            cameraController?.setCustomExposureWithISO(iso: sender.value)
-        default: break
+        cameraController.captureStillImage { (image, metadata) in
+            print(metadata)
         }
+//        cameraController.toggleRecording()
     }
 }
 
-extension ViewController: CameraControllerDelegate {
-    func cameraController(cameraController: CameraController, didDetectFaces faces:Array<(id:Int,frame:CGRect)>) { }
-    
+extension ViewController: CameraControllerDelegate {    
     func cameraController(cameraController: CameraController, didOutputImage image: CIImage) {
         if glContext != EAGLContext.current() {
             EAGLContext.setCurrent(glContext)

@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,7 +35,7 @@
                                 </constraints>
                                 <state key="normal" title="save"/>
                                 <connections>
-                                    <action selector="recordVideoButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dsv-qV-jUP"/>
+                                    <action selector="recordVideoButtonClickedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NiJ-1B-jEg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMW-Nl-vk4">
@@ -46,65 +46,24 @@
                                 </constraints>
                                 <state key="normal" image="SwitchCamera"/>
                                 <connections>
-                                    <action selector="swapCameraButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Xs-45-biF"/>
+                                    <action selector="swapCameraButtonClickedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C04-DO-n8O"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="plU-lw-AWE">
-                                <rect key="frame" x="16" y="487" width="343" height="180"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="0.27222521551724138" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="xj8-yS-Hbh"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ISO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cwy-U1-pkE">
-                                <rect key="frame" x="174" y="517" width="28" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="1Pg-2G-Vof">
-                                <rect key="frame" x="30" y="546" width="315" height="31"/>
-                                <connections>
-                                    <action selector="sliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="MnQ-qT-lYU"/>
-                                </connections>
-                            </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stored Frame Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4Z-nq-jBl">
-                                <rect key="frame" x="110" y="584" width="154.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="F95-DO-gTj">
-                                <rect key="frame" x="30" y="613" width="315" height="31"/>
-                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="plU-lw-AWE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="1h2-2f-sai"/>
-                            <constraint firstItem="F95-DO-gTj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="9Rx-bg-dOM"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NYw-gc-LNM" secondAttribute="trailingMargin" id="AvL-ad-Nk3"/>
                             <constraint firstItem="P00-qU-5gW" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="BP6-yf-tcw"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="F95-DO-gTj" secondAttribute="bottom" constant="24" id="DNh-Cf-kWZ"/>
                             <constraint firstItem="P00-qU-5gW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="I25-F4-VGk"/>
-                            <constraint firstItem="F95-DO-gTj" firstAttribute="top" secondItem="u4Z-nq-jBl" secondAttribute="bottom" constant="8" id="IJG-ry-324"/>
-                            <constraint firstItem="Cwy-U1-pkE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KRp-hr-wOL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="iMW-Nl-vk4" secondAttribute="trailing" constant="8" id="N7v-KZ-Nii"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="F95-DO-gTj" secondAttribute="trailing" constant="16" id="R9Y-de-Mxv"/>
                             <constraint firstItem="P00-qU-5gW" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="S2s-b2-6FR"/>
                             <constraint firstItem="P00-qU-5gW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="VKf-El-Ud2"/>
                             <constraint firstItem="iMW-Nl-vk4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="aYj-xu-diO"/>
                             <constraint firstItem="NYw-gc-LNM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="cX1-KY-Mvv"/>
-                            <constraint firstItem="u4Z-nq-jBl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="d6e-Uk-yWM"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1Pg-2G-Vof" secondAttribute="trailing" constant="16" id="ddG-aX-rIg"/>
                             <constraint firstItem="NYw-gc-LNM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="fls-FW-gr7"/>
-                            <constraint firstItem="u4Z-nq-jBl" firstAttribute="top" secondItem="1Pg-2G-Vof" secondAttribute="bottom" constant="8" id="gLD-Rh-62b"/>
-                            <constraint firstItem="1Pg-2G-Vof" firstAttribute="top" secondItem="Cwy-U1-pkE" secondAttribute="bottom" constant="8" id="i5p-hZ-zq6"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="plU-lw-AWE" secondAttribute="bottom" id="sGm-T6-seB"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="plU-lw-AWE" secondAttribute="trailing" id="t4T-iP-jYt"/>
-                            <constraint firstItem="1Pg-2G-Vof" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="w6i-OT-yUX"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="isoSlider" destination="1Pg-2G-Vof" id="zoo-5w-Xgu"/>
                         <outlet property="recordVideoButton" destination="NYw-gc-LNM" id="bx3-4X-Ca9"/>
                         <outlet property="swapCameraButton" destination="iMW-Nl-vk4" id="CLu-k3-rpx"/>
                         <outlet property="videoPreviewView" destination="P00-qU-5gW" id="a0x-My-e8d"/>
