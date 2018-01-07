@@ -314,10 +314,12 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         
         // Creates the image from the graphics context
-        let dstImage = context.makeImage()
+        guard let dstImage = context.makeImage() else {
+            fatalError("could not create image from cgcontext")
+        }
         
         // Creates the final UIImage
-        return UIImage(cgImage: dstImage!, scale: 0.0, orientation: .up)
+        return UIImage(cgImage: dstImage, scale: 0.0, orientation: .up)
     }
     
     func texture(from image: UIImage) -> MTLTexture {
@@ -335,6 +337,58 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
         } catch {
             fatalError("Can't load texture")
         }
+    }
+    
+    func executeMetalPipeline() {
+        // configure Metal pipeline
+        guard let buffer = metalCommandQueue.makeCommandBuffer() else {
+            fatalError("Metal could not create command buffer")
+        }
+        metalCommandBuffer = buffer
+        
+        
+        guard let encoder = metalCommandBuffer.makeComputeCommandEncoder() else {
+            fatalError("Metal could not create command encoder")
+        }
+        metalCommandEncoder = encoder
+        
+        do {
+            let pipelineState = try metalDevice.makeComputePipelineState(function: metalKernelFunction)
+            metalCommandEncoder.setComputePipelineState(pipelineState)
+        } catch {
+            fatalError("Metal could not add set the compute pipeline state")
+        }
+        
+        // Encodes the input texture set it at location 0
+        metalCommandEncoder.setTexture(inTexture, index: 0)
+        
+        // Encodes the output texture set it at location 1
+        metalCommandEncoder.setTexture(outTexture, index: 1)
+        
+        // Encodes the dispatch of threadgroups
+        let threadGroupCount = MTLSizeMake(16, 16, 1)
+        let threadGroups = MTLSizeMake(imageWidth/threadGroupCount.width, imageHeight/threadGroupCount.height, 1)
+        metalCommandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
+        
+        // Ends the encoding of the command
+        metalCommandEncoder.endEncoding()
+        
+        // Commits the command to the command buffer
+        metalCommandBuffer.commit()
+        
+        // Waits for the execution of the commands
+        metalCommandBuffer.waitUntilCompleted()
+        
+        // for future reference ... the input buffer is more suited for gpgpu
+        //        let valueByteLength = inputarray.count*MemoryLayout.size(ofValue: inputarray[0])
+        //
+        //        // add the input array to the metal buffer
+        //        var inVectorBuffer = device.makeBuffer(bytes: &inputarray, length: valueByteLength, options: .storageModeShared)
+        //        commandEncoder.setBuffer(inVectorBuffer, offset: 0, index: 0)
+        //
+        //        // add the output array to the metal buffer
+        //        var outVectorBuffer = device.makeBuffer(bytes: &resultarray, length: valueByteLength, options: .storageModeShared)
+        //        commandEncoder.setBuffer(outVectorBuffer, offset: 0, index: 1)
     }
 }
 
@@ -428,57 +482,5 @@ private extension CameraController {
                 self.session.addOutput(self.movieFileOutput)
             }
         }
-    }
-    
-    func executeMetalPipeline() {
-        // configure Metal pipeline
-        guard let buffer = metalCommandQueue.makeCommandBuffer() else {
-            fatalError("Metal could not create command buffer")
-        }
-        metalCommandBuffer = buffer
-        
-        
-        guard let encoder = metalCommandBuffer.makeComputeCommandEncoder() else {
-            fatalError("Metal could not create command encoder")
-        }
-        metalCommandEncoder = encoder
-        
-        do {
-            let pipelineState = try metalDevice.makeComputePipelineState(function: metalKernelFunction)
-            metalCommandEncoder.setComputePipelineState(pipelineState)
-        } catch {
-            fatalError("Metal could not add set the compute pipeline state")
-        }
-        
-        // Encodes the input texture set it at location 0
-        metalCommandEncoder.setTexture(inTexture, index: 0)
-        
-        // Encodes the output texture set it at location 1
-        metalCommandEncoder.setTexture(outTexture, index: 1)
-        
-        // Encodes the dispatch of threadgroups
-        let threadGroupCount = MTLSizeMake(16, 16, 1)
-        let threadGroups = MTLSizeMake(imageWidth/threadGroupCount.width, imageHeight/threadGroupCount.height, 1)
-        metalCommandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
-        
-        // Ends the encoding of the command
-        metalCommandEncoder.endEncoding()
-        
-        // Commits the command to the command buffer
-        metalCommandBuffer.commit()
-        
-        // Waits for the execution of the commands
-        metalCommandBuffer.waitUntilCompleted()
-        
-        // for future reference ... the input buffer is more suited for gpgpu
-//        let valueByteLength = inputarray.count*MemoryLayout.size(ofValue: inputarray[0])
-//
-//        // add the input array to the metal buffer
-//        var inVectorBuffer = device.makeBuffer(bytes: &inputarray, length: valueByteLength, options: .storageModeShared)
-//        commandEncoder.setBuffer(inVectorBuffer, offset: 0, index: 0)
-//
-//        // add the output array to the metal buffer
-//        var outVectorBuffer = device.makeBuffer(bytes: &resultarray, length: valueByteLength, options: .storageModeShared)
-//        commandEncoder.setBuffer(outVectorBuffer, offset: 0, index: 1)
     }
 }
