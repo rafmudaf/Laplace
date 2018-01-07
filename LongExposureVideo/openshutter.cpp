@@ -44,7 +44,7 @@ Mat lastframe() {
 }
 
 Mat framediff(Mat image0, Mat image1, Mat image2) {
-    //        return (image0 - 2*image1 + image2)/((image0 - image1) + (image1 - image2));
+//        return (image0 - 2*image1 + image2)/((image0 - image1) + (image1 - image2));
     return image2 - image0;
 }
 

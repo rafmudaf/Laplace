@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var videoPreviewView: UIView!
     @IBOutlet weak var swapCameraButton: UIButton!
     @IBOutlet weak var recordVideoButton: UIButton!
-
+    
     var glContext: EAGLContext?
     var ciContext: CIContext?
     var renderBuffer: GLuint = GLuint()
@@ -54,6 +54,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func recordVideoButtonClicked(sender: AnyObject) {
+        
         cameraController.captureStillImage { (image, metadata) in
             print(metadata)
         }

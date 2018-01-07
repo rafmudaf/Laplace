@@ -5,11 +5,12 @@
 //  Created by Rafael M Mudafort on 1/1/17.
 //  Copyright © 2017 Rafael M Mudafort. All rights reserved.
 //
+// metal references:
+// http://metalbyexample.com/fundamentals-of-image-processing/
+// http://metalbyexample.com/introduction-to-compute/
+// https://www.invasivecode.com/weblog/metal-image-processing
 
 import AVFoundation
-import UIKit
-import GLKit
-import AssetsLibrary
 import MetalKit
 
 protocol CameraControllerDelegate : class {
@@ -108,10 +109,6 @@ class CameraController: NSObject {
             fatalError("Metal could not create the kernal function")
         }
         metalKernelFunction = kernelFunction
-        
-        inTexture = texture(from: #imageLiteral(resourceName: "SwitchCamera"))
-        
-        executeMetalPipeline()
     }
     
     func startRunning() {
@@ -453,16 +450,6 @@ private extension CameraController {
             fatalError("Metal could not add set the compute pipeline state")
         }
         
-//        let valueByteLength = inputarray.count*MemoryLayout.size(ofValue: inputarray[0])
-//
-//        // add the input array to the metal buffer
-//        var inVectorBuffer = device.makeBuffer(bytes: &inputarray, length: valueByteLength, options: .storageModeShared)
-//        commandEncoder.setBuffer(inVectorBuffer, offset: 0, index: 0)
-//
-//        // add the output array to the metal buffer
-//        var outVectorBuffer = device.makeBuffer(bytes: &resultarray, length: valueByteLength, options: .storageModeShared)
-//        commandEncoder.setBuffer(outVectorBuffer, offset: 0, index: 1)
-        
         // Encodes the input texture set it at location 0
         metalCommandEncoder.setTexture(inTexture, index: 0)
         
@@ -482,5 +469,16 @@ private extension CameraController {
         
         // Waits for the execution of the commands
         metalCommandBuffer.waitUntilCompleted()
+        
+        // for future reference ... the input buffer is more suited for gpgpu
+//        let valueByteLength = inputarray.count*MemoryLayout.size(ofValue: inputarray[0])
+//
+//        // add the input array to the metal buffer
+//        var inVectorBuffer = device.makeBuffer(bytes: &inputarray, length: valueByteLength, options: .storageModeShared)
+//        commandEncoder.setBuffer(inVectorBuffer, offset: 0, index: 0)
+//
+//        // add the output array to the metal buffer
+//        var outVectorBuffer = device.makeBuffer(bytes: &resultarray, length: valueByteLength, options: .storageModeShared)
+//        commandEncoder.setBuffer(outVectorBuffer, offset: 0, index: 1)
     }
 }
