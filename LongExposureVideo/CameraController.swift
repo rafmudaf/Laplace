@@ -26,6 +26,8 @@ class CameraController: NSObject {
     var currentlyRecording = false
     
     let assetManager = AssetManager()
+    let imageWidth = 720
+    let imageHeight = 1280
     
     // AVCapture variables
     var sessionQueue = DispatchQueue(label: "session_access_queue")
@@ -40,11 +42,15 @@ class CameraController: NSObject {
     var metadataOutput: AVCaptureMetadataOutput!
     
     // Metal variables
-    var device: MTLDevice!
-    var defaultLibrary: MTLLibrary!
-    var commandQueue: MTLCommandQueue?
-    var commandBuffer: MTLCommandBuffer?
-    var commandEncoder: MTLComputeCommandEncoder!
+    var metalDevice: MTLDevice!
+    var metalLibrary: MTLLibrary!
+    var metalCommandQueue: MTLCommandQueue!
+    var metalCommandBuffer: MTLCommandBuffer!
+    var metalCommandEncoder: MTLComputeCommandEncoder!
+    var metalKernelFunction: MTLFunction!
+    var inTexture: MTLTexture!
+    var outTexture: MTLTexture!
+    let bytesPerPixel: Int = 4
     
     required init(delegate: CameraControllerDelegate) {
         self.delegate = delegate
@@ -82,20 +88,30 @@ class CameraController: NSObject {
     }
     
     func initializeMetal() {
-        device = MTLCreateSystemDefaultDevice()
-        defaultLibrary = device.makeDefaultLibrary()
-        commandQueue = device.makeCommandQueue()
-        guard let queue = commandQueue else {
-            print("Metal could not create command queue")
-            return
+        
+        guard let device = MTLCreateSystemDefaultDevice() else {
+            fatalError("Metal could not create device")
         }
-        commandBuffer = queue.makeCommandBuffer()
-        guard let buffer = commandBuffer else {
-            print("Metal could not create command buffer")
-            return
+        metalDevice = device
+        
+        guard let library = metalDevice.makeDefaultLibrary() else {
+            fatalError("Metal could not create library")
         }
-        commandEncoder = buffer.makeComputeCommandEncoder()
-        configureMetal()
+        metalLibrary = library
+        
+        guard let queue = metalDevice.makeCommandQueue() else {
+            fatalError("Metal could not create command queue")
+        }
+        metalCommandQueue = queue
+        
+        guard let kernelFunction = metalLibrary.makeFunction(name: "processingKernel") else {
+            fatalError("Metal could not create the kernal function")
+        }
+        metalKernelFunction = kernelFunction
+        
+        inTexture = texture(from: #imageLiteral(resourceName: "SwitchCamera"))
+        
+        executeMetalPipeline()
     }
     
     func startRunning() {
@@ -143,6 +159,12 @@ class CameraController: NSObject {
             print("error capturing the device \(error)")
         }
         session.commitConfiguration()
+    }
+    
+    func captureStillImage(completionHandler handler: @escaping ((_ image: UIImage, _ metadata: NSDictionary) -> Void)) {
+        sessionQueue.async() { () -> Void in
+            self.stillCameraOutput.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
+        }
     }
     
     func toggleRecording() {
@@ -209,12 +231,6 @@ class CameraController: NSObject {
             currentlyRecording = false
         }
     }
-    
-    func captureStillImage(completionHandler handler: @escaping ((_ image: UIImage, _ metadata: NSDictionary) -> Void)) {
-        sessionQueue.async() { () -> Void in
-            self.stillCameraOutput.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
-        }
-    }
 }
 
 extension CameraController: AVCapturePhotoCaptureDelegate {
@@ -244,74 +260,90 @@ extension CameraController: AVCapturePhotoCaptureDelegate {
     }
 }
 
-extension CameraController: AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureFileOutputRecordingDelegate {
-    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        return
+extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
+    
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        
+//        currentSampleBuffer = sampleBuffer
+//        newSampleBufferExists = true
+
+        guard let imageBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            fatalError("error converting CMSampleBuffer")
+            
+        }
+        let ciimage = CIImage(cvPixelBuffer: imageBuffer)
+        guard let uiimage = convert(cmage: ciimage) else {
+            fatalError("error converting CIImage to UIImage")
+        }
+        inTexture = texture(from: uiimage)
+        
+        executeMetalPipeline()
+
+        let outimage = image(from: outTexture)
+        if let ciimage = CIImage(image: outimage) {
+            self.delegate?.cameraController(cameraController: self, didOutputImage: ciimage)
+        }
     }
     
-    internal func captureOutput(_ captureOutput: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        currentSampleBuffer = sampleBuffer
-        newSampleBufferExists = true
-        guard let uiimage = uiimageFromSampleBuffer(sampleBuffer: sampleBuffer) else {
-            print("error in uiimageFromSampleBuffer")
-            return
-        }
-        var ocvimage = CVWrapper.processImage(withOpenCV: uiimage)
-        if self.currentCameraDevice?.position == .front {
-            ocvimage = UIImage(cgImage: ocvimage!.cgImage!, scale: (ocvimage?.scale)!, orientation: .leftMirrored)
-        }
-        let ciimage = CIImage(image: ocvimage!)
-        if ciimage != nil {
-            self.delegate?.cameraController(cameraController: self, didOutputImage: ciimage!)
-        }
-    }
-    
-    func uiimageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
-        // Get a CMSampleBuffer's Core Video image buffer for the media data
-        guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
-            print("error in CMSampleBufferGetImageBuffer")
+    func convert(cmage: CIImage) -> UIImage? {
+        let context = CIContext(options: nil)
+        guard let cgImage = context.createCGImage(cmage, from: cmage.extent) else {
             return nil
         }
-        
-        // Lock the base address of the pixel buffer
-        CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags.readOnly)
-        
-        // Get the number of bytes per row for the pixel buffer
-        let baseAddress = CVPixelBufferGetBaseAddress(imageBuffer)
-        
-        // Get the number of bytes per row for the pixel buffer
-        let bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer)
-        
-        // Get the pixel buffer width and height
-        let width = CVPixelBufferGetWidth(imageBuffer)
-        let height = CVPixelBufferGetHeight(imageBuffer)
-        
-        // Create a device-dependent RGB color space
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        
-        // Create a bitmap graphics context with the sample buffer data
-        var bitmapInfo: UInt32 = CGBitmapInfo.byteOrder32Little.rawValue
-        bitmapInfo |= CGImageAlphaInfo.premultipliedFirst.rawValue & CGBitmapInfo.alphaInfoMask.rawValue
-        //let bitmapInfo: UInt32 = CGBitmapInfo.alphaInfoMask.rawValue
-        let context = CGContext(data: baseAddress, width: width, height: height, bitsPerComponent: 8, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo, releaseCallback: nil, releaseInfo: nil)
-        
-        // Create a Quartz image from the pixel data in the bitmap graphics context
-        let quartzImage = context!.makeImage()
-        
-        // Unlock the pixel buffer
-        CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags.readOnly)
-        
-        // Create an image object from the Quartz image
-        let image = UIImage(cgImage: quartzImage!)
-//        let image = UIImage(CGImage: quartzImage!, scale: 1.0, orientation: UIImageOrientation.Right)
-        
-        return image
+        return UIImage(cgImage: cgImage)
     }
     
-    func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
-        if error != nil {
-            print("error in recording video: \(error)")
+    func image(from texture: MTLTexture) -> UIImage {
+        
+        // The total number of bytes of the texture
+        let imageByteCount = texture.width * texture.height * bytesPerPixel
+        
+        // The number of bytes for each image row
+        let bytesPerRow = texture.width * bytesPerPixel
+        
+        // An empty buffer that will contain the image
+        var src = [UInt8](repeating: 0, count: Int(imageByteCount))
+        
+        // Gets the bytes from the texture
+        let region = MTLRegionMake2D(0, 0, texture.width, texture.height)
+        texture.getBytes(&src, bytesPerRow: bytesPerRow, from: region, mipmapLevel: 0)
+        
+        // Creates an image context
+        let bitmapInfo = CGBitmapInfo(rawValue: (CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue))
+        let bitsPerComponent = 8
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        guard let context = CGContext(data: &src, width: texture.width, height: texture.height, bitsPerComponent: bitsPerComponent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else {
+            fatalError("could not create cgcontext")
         }
+        
+        // Creates the image from the graphics context
+        let dstImage = context.makeImage()
+        
+        // Creates the final UIImage
+        return UIImage(cgImage: dstImage!, scale: 0.0, orientation: .up)
+    }
+    
+    func texture(from image: UIImage) -> MTLTexture {
+        
+        guard let cgImage = image.cgImage else {
+            fatalError("Can't open image \(image)")
+        }
+        
+        let textureLoader = MTKTextureLoader(device: metalDevice)
+        do {
+            let textureOut = try textureLoader.newTexture(cgImage: cgImage, options: nil)
+            let textureDescriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: textureOut.pixelFormat, width: textureOut.width, height: textureOut.height, mipmapped: false)
+            outTexture = metalDevice.makeTexture(descriptor: textureDescriptor)
+            return textureOut
+        } catch {
+            fatalError("Can't load texture")
+        }
+    }
+}
+
+extension CameraController: AVCaptureFileOutputRecordingDelegate {
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        return
     }
 }
 
@@ -327,7 +359,7 @@ private extension CameraController {
     func configureSession() {
         configureDeviceInput()
         configureStillImageCameraOutput()
-        //        configureMovieOutput()
+//        configureMovieOutput()
         configureVideoOutput()
     }
     
@@ -401,13 +433,26 @@ private extension CameraController {
         }
     }
     
-    func configureMetal() {
-//        let kernelFunction = defaultLibrary?.makeFunction(name: "squareValueShader")
-//        do {
-//            var pipelineState = try device.makeComputePipelineState(function: kernelFunction!)
-//        } catch {
-//            return
-//        }
+    func executeMetalPipeline() {
+        // configure Metal pipeline
+        guard let buffer = metalCommandQueue.makeCommandBuffer() else {
+            fatalError("Metal could not create command buffer")
+        }
+        metalCommandBuffer = buffer
+        
+        
+        guard let encoder = metalCommandBuffer.makeComputeCommandEncoder() else {
+            fatalError("Metal could not create command encoder")
+        }
+        metalCommandEncoder = encoder
+        
+        do {
+            let pipelineState = try metalDevice.makeComputePipelineState(function: metalKernelFunction)
+            metalCommandEncoder.setComputePipelineState(pipelineState)
+        } catch {
+            fatalError("Metal could not add set the compute pipeline state")
+        }
+        
 //        let valueByteLength = inputarray.count*MemoryLayout.size(ofValue: inputarray[0])
 //
 //        // add the input array to the metal buffer
@@ -417,5 +462,25 @@ private extension CameraController {
 //        // add the output array to the metal buffer
 //        var outVectorBuffer = device.makeBuffer(bytes: &resultarray, length: valueByteLength, options: .storageModeShared)
 //        commandEncoder.setBuffer(outVectorBuffer, offset: 0, index: 1)
+        
+        // Encodes the input texture set it at location 0
+        metalCommandEncoder.setTexture(inTexture, index: 0)
+        
+        // Encodes the output texture set it at location 1
+        metalCommandEncoder.setTexture(outTexture, index: 1)
+        
+        // Encodes the dispatch of threadgroups
+        let threadGroupCount = MTLSizeMake(16, 16, 1)
+        let threadGroups = MTLSizeMake(imageWidth/threadGroupCount.width, imageHeight/threadGroupCount.height, 1)
+        metalCommandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
+        
+        // Ends the encoding of the command
+        metalCommandEncoder.endEncoding()
+        
+        // Commits the command to the command buffer
+        metalCommandBuffer.commit()
+        
+        // Waits for the execution of the commands
+        metalCommandBuffer.waitUntilCompleted()
     }
 }
