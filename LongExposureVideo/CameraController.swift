@@ -330,6 +330,7 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
         do {
             let textureOut = try textureLoader.newTexture(cgImage: cgImage, options: nil)
             let textureDescriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: textureOut.pixelFormat, width: textureOut.width, height: textureOut.height, mipmapped: false)
+            textureDescriptor.usage = [.shaderRead, .shaderWrite]
             outTexture = metalDevice.makeTexture(descriptor: textureDescriptor)
             return textureOut
         } catch {
