@@ -88,6 +88,8 @@ class CameraController: NSObject {
             configureSession()
         case .denied, .restricted:
             print("permission for camera not granted")
+        @unknown default:
+            fatalError()
         }
     }
     
@@ -202,7 +204,7 @@ class CameraController: NSObject {
 //                        kCVPixelBufferHeightKey as String: asset.size.height,
 //                    ])
                 assetWriter.startWriting()
-                assetWriter.startSession(atSourceTime: kCMTimeZero)
+                assetWriter.startSession(atSourceTime: CMTime.zero)
 
                 writerInput.requestMediaDataWhenReady(on: DispatchQueue(label: "VideoWriterQueue")) {
                     while writerInput.isReadyForMoreMediaData {
