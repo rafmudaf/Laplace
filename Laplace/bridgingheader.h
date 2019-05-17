@@ -1,6 +1,6 @@
 //
 //  bridgingheader.h
-//  LongExposureVideo
+//  Laplace
 //
 //  Created by Rafael M Mudafort on 12/31/16.
 //  Copyright © 2016 Rafael M Mudafort. All rights reserved.

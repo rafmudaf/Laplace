@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  LongExposureVideo
+//  Laplace
 //
 //  Created by Rafael M Mudafort on 3/6/16.
 //  Copyright © 2016 Rafael M Mudafort. All rights reserved.
@@ -25,23 +25,21 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         cameraController = CameraController(delegate: self)
         
-        glContext = EAGLContext(api: .openGLES2)
-        glView = GLKView(frame: videoPreviewView.frame, context: glContext!)
-        glView!.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))
+        let glContext = EAGLContext(api: .openGLES2)
+        let glView = GLKView(frame: videoPreviewView.frame, context: glContext!)
+        glView.backgroundColor = .black
+        glView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))
         
-        // what does this do?
-        /*
-        if let window = glView!.window {
-            glView!.frame = window.bounds
-        }
-        */
+        glView.frame = videoPreviewView.frame
+        let ciContext = CIContext(eaglContext: glContext!)
+        videoPreviewView.addSubview(glView)
         
-        glView!.frame = videoPreviewView.frame
-        ciContext = CIContext(eaglContext: glContext!)
-        videoPreviewView.addSubview(glView!)
+        // set global variables
+        self.glContext = glContext
+        self.ciContext = ciContext
+        self.glView = glView
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,8 +65,12 @@ extension ViewController: CameraControllerDelegate {
         if glContext != EAGLContext.current() {
             EAGLContext.setCurrent(glContext)
         }
-        glView!.bindDrawable()
+        guard let glView = self.glView else {
+            fatalError("glView not accessible")
+        }
+        
+        glView.bindDrawable()
         ciContext?.draw(image, in: image.extent, from: image.extent)
-        glView!.display()
+        glView.display()
     }
 }

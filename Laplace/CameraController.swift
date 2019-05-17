@@ -1,6 +1,6 @@
 //
 //  CameraController.swift
-//  LongExposureVideo
+//  Laplace
 //
 //  Created by Rafael M Mudafort on 1/1/17.
 //  Copyright © 2017 Rafael M Mudafort. All rights reserved.
@@ -52,6 +52,9 @@ class CameraController: NSObject {
     var inTexture: MTLTexture!
     var outTexture: MTLTexture!
     let bytesPerPixel: Int = 4
+    let threadGroupCount = MTLSizeMake(16, 16, 1)
+    lazy var threadGroups = MTLSizeMake(imageWidth/threadGroupCount.width, imageHeight/threadGroupCount.height, 1)
+    let colorSpace = CGColorSpaceCreateDeviceRGB()
     
     required init(delegate: CameraControllerDelegate) {
         self.delegate = delegate
@@ -85,6 +88,8 @@ class CameraController: NSObject {
             configureSession()
         case .denied, .restricted:
             print("permission for camera not granted")
+        @unknown default:
+            fatalError()
         }
     }
     
@@ -199,7 +204,7 @@ class CameraController: NSObject {
 //                        kCVPixelBufferHeightKey as String: asset.size.height,
 //                    ])
                 assetWriter.startWriting()
-                assetWriter.startSession(atSourceTime: kCMTimeZero)
+                assetWriter.startSession(atSourceTime: CMTime.zero)
 
                 writerInput.requestMediaDataWhenReady(on: DispatchQueue(label: "VideoWriterQueue")) {
                     while writerInput.isReadyForMoreMediaData {
@@ -260,16 +265,12 @@ extension CameraController: AVCapturePhotoCaptureDelegate {
 extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        
-//        currentSampleBuffer = sampleBuffer
-//        newSampleBufferExists = true
 
         guard let imageBuffer: CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             fatalError("error converting CMSampleBuffer")
-            
         }
         let ciimage = CIImage(cvPixelBuffer: imageBuffer)
-        guard let uiimage = convert(cmage: ciimage) else {
+        guard let uiimage = convert(ciimage: ciimage) else {
             fatalError("error converting CIImage to UIImage")
         }
         inTexture = texture(from: uiimage)
@@ -282,9 +283,9 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
     
-    func convert(cmage: CIImage) -> UIImage? {
+    func convert(ciimage: CIImage) -> UIImage? {
         let context = CIContext(options: nil)
-        guard let cgImage = context.createCGImage(cmage, from: cmage.extent) else {
+        guard let cgImage = context.createCGImage(ciimage, from: ciimage.extent) else {
             return nil
         }
         return UIImage(cgImage: cgImage)
@@ -308,7 +309,6 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
         // Creates an image context
         let bitmapInfo = CGBitmapInfo(rawValue: (CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue))
         let bitsPerComponent = 8
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
         guard let context = CGContext(data: &src, width: texture.width, height: texture.height, bitsPerComponent: bitsPerComponent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else {
             fatalError("could not create cgcontext")
         }
@@ -332,6 +332,7 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
         do {
             let textureOut = try textureLoader.newTexture(cgImage: cgImage, options: nil)
             let textureDescriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: textureOut.pixelFormat, width: textureOut.width, height: textureOut.height, mipmapped: false)
+            textureDescriptor.usage = [.shaderRead, .shaderWrite]
             outTexture = metalDevice.makeTexture(descriptor: textureDescriptor)
             return textureOut
         } catch {
@@ -340,6 +341,7 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     func executeMetalPipeline() {
+        
         // configure Metal pipeline
         guard let buffer = metalCommandQueue.makeCommandBuffer() else {
             fatalError("Metal could not create command buffer")
@@ -366,8 +368,6 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
         metalCommandEncoder.setTexture(outTexture, index: 1)
         
         // Encodes the dispatch of threadgroups
-        let threadGroupCount = MTLSizeMake(16, 16, 1)
-        let threadGroups = MTLSizeMake(imageWidth/threadGroupCount.width, imageHeight/threadGroupCount.height, 1)
         metalCommandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
         
         // Ends the encoding of the command

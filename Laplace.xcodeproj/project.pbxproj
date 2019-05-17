@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		057B116F1E1A3E420078725B /* openshutter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057B116D1E1A3E420078725B /* openshutter.cpp */; };
+		0537109D228F0B4B00FCEBFA /* image_kernals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0537109B228F0B4A00FCEBFA /* image_kernals.cpp */; };
 		0585FD961E1869A50043071C /* CVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD951E1869A50043071C /* CVWrapper.mm */; };
-		0585FD9D1E186BDA0043071C /* UIImage+OpenCV.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD9A1E186BDA0043071C /* UIImage+OpenCV.mm */; };
 		0585FDA31E19BCD40043071C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0585FDA21E19BCD40043071C /* CameraController.swift */; };
 		05D980171C8D4CBA00F8A255 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D980161C8D4CBA00F8A255 /* AppDelegate.swift */; };
 		05D980191C8D4CBA00F8A255 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D980181C8D4CBA00F8A255 /* ViewController.swift */; };
@@ -18,28 +17,26 @@
 		05D980211C8D4CBA00F8A255 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05D9801F1C8D4CBA00F8A255 /* LaunchScreen.storyboard */; };
 		403C9F761FFEF7E1001FCC45 /* shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 403C9F751FFEF7E1001FCC45 /* shaders.metal */; };
 		403C9F791FFF4B37001FCC45 /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C9F781FFF4B37001FCC45 /* AssetManager.swift */; };
-		AB06F7173570C02A00E59C2C /* Pods_LongExposureVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3723D8FF682014B8060CE6 /* Pods_LongExposureVideo.framework */; };
+		AB06F7173570C02A00E59C2C /* Pods_Laplace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3723D8FF682014B8060CE6 /* Pods_Laplace.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		057B116D1E1A3E420078725B /* openshutter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = openshutter.cpp; sourceTree = "<group>"; };
-		057B116E1E1A3E420078725B /* openshutter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = openshutter.hpp; sourceTree = "<group>"; };
+		0537109B228F0B4A00FCEBFA /* image_kernals.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_kernals.cpp; path = /Users/raf/Development/Laplace/Laplace/image_kernals.cpp; sourceTree = "<absolute>"; };
+		0537109C228F0B4B00FCEBFA /* image_kernels.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = image_kernels.hpp; path = /Users/raf/Development/Laplace/Laplace/image_kernels.hpp; sourceTree = "<absolute>"; };
 		0585FD931E1868B00043071C /* bridgingheader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridgingheader.h; sourceTree = "<group>"; };
 		0585FD941E1868E10043071C /* CVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVWrapper.h; sourceTree = "<group>"; };
 		0585FD951E1869A50043071C /* CVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVWrapper.mm; sourceTree = "<group>"; };
-		0585FD991E186BDA0043071C /* UIImage+OpenCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+OpenCV.h"; sourceTree = "<group>"; };
-		0585FD9A1E186BDA0043071C /* UIImage+OpenCV.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIImage+OpenCV.mm"; sourceTree = "<group>"; };
 		0585FDA21E19BCD40043071C /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
-		05D980131C8D4CBA00F8A255 /* LongExposureVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LongExposureVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05D980131C8D4CBA00F8A255 /* Laplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Laplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05D980161C8D4CBA00F8A255 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05D980181C8D4CBA00F8A255 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		05D9801B1C8D4CBA00F8A255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		05D9801D1C8D4CBA00F8A255 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05D980201C8D4CBA00F8A255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		05D980221C8D4CBA00F8A255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A9124CA19C99B272346C386 /* Pods-LongExposureVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LongExposureVideo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LongExposureVideo/Pods-LongExposureVideo.debug.xcconfig"; sourceTree = "<group>"; };
-		3A3723D8FF682014B8060CE6 /* Pods_LongExposureVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LongExposureVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B358C5F612BEBA9DDC8FB9F /* Pods-LongExposureVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LongExposureVideo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LongExposureVideo/Pods-LongExposureVideo.release.xcconfig"; sourceTree = "<group>"; };
+		0A9124CA19C99B272346C386 /* Pods-Laplace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Laplace.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Laplace/Pods-Laplace.debug.xcconfig"; sourceTree = "<group>"; };
+		3A3723D8FF682014B8060CE6 /* Pods_Laplace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Laplace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B358C5F612BEBA9DDC8FB9F /* Pods-Laplace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Laplace.release.xcconfig"; path = "Pods/Target Support Files/Pods-Laplace/Pods-Laplace.release.xcconfig"; sourceTree = "<group>"; };
 		403C9F751FFEF7E1001FCC45 /* shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = shaders.metal; sourceTree = "<group>"; };
 		403C9F781FFF4B37001FCC45 /* AssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB06F7173570C02A00E59C2C /* Pods_LongExposureVideo.framework in Frameworks */,
+				AB06F7173570C02A00E59C2C /* Pods_Laplace.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +56,7 @@
 		05D9800A1C8D4CBA00F8A255 = {
 			isa = PBXGroup;
 			children = (
-				05D980151C8D4CBA00F8A255 /* LongExposureVideo */,
+				05D980151C8D4CBA00F8A255 /* Laplace */,
 				05D980141C8D4CBA00F8A255 /* Products */,
 				D42813D93DACCDE109A1DC78 /* Pods */,
 				0C37121B526784B186D229FD /* Frameworks */,
@@ -69,17 +66,15 @@
 		05D980141C8D4CBA00F8A255 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				05D980131C8D4CBA00F8A255 /* LongExposureVideo.app */,
+				05D980131C8D4CBA00F8A255 /* Laplace.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		05D980151C8D4CBA00F8A255 /* LongExposureVideo */ = {
+		05D980151C8D4CBA00F8A255 /* Laplace */ = {
 			isa = PBXGroup;
 			children = (
 				403C9F771FFEFCB4001FCC45 /* app */,
-				0585FD991E186BDA0043071C /* UIImage+OpenCV.h */,
-				0585FD9A1E186BDA0043071C /* UIImage+OpenCV.mm */,
 				05D980161C8D4CBA00F8A255 /* AppDelegate.swift */,
 				05D980181C8D4CBA00F8A255 /* ViewController.swift */,
 				05D9801A1C8D4CBA00F8A255 /* Main.storyboard */,
@@ -88,17 +83,17 @@
 				0585FD931E1868B00043071C /* bridgingheader.h */,
 				0585FDA21E19BCD40043071C /* CameraController.swift */,
 				403C9F781FFF4B37001FCC45 /* AssetManager.swift */,
-				057B116D1E1A3E420078725B /* openshutter.cpp */,
-				057B116E1E1A3E420078725B /* openshutter.hpp */,
 				403C9F751FFEF7E1001FCC45 /* shaders.metal */,
+				0537109B228F0B4A00FCEBFA /* image_kernals.cpp */,
+				0537109C228F0B4B00FCEBFA /* image_kernels.hpp */,
 			);
-			path = LongExposureVideo;
+			path = Laplace;
 			sourceTree = "<group>";
 		};
 		0C37121B526784B186D229FD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3A3723D8FF682014B8060CE6 /* Pods_LongExposureVideo.framework */,
+				3A3723D8FF682014B8060CE6 /* Pods_Laplace.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -116,8 +111,8 @@
 		D42813D93DACCDE109A1DC78 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0A9124CA19C99B272346C386 /* Pods-LongExposureVideo.debug.xcconfig */,
-				3B358C5F612BEBA9DDC8FB9F /* Pods-LongExposureVideo.release.xcconfig */,
+				0A9124CA19C99B272346C386 /* Pods-Laplace.debug.xcconfig */,
+				3B358C5F612BEBA9DDC8FB9F /* Pods-Laplace.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -125,24 +120,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		05D980121C8D4CBA00F8A255 /* LongExposureVideo */ = {
+		05D980121C8D4CBA00F8A255 /* Laplace */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 05D9803B1C8D4CBA00F8A255 /* Build configuration list for PBXNativeTarget "LongExposureVideo" */;
+			buildConfigurationList = 05D9803B1C8D4CBA00F8A255 /* Build configuration list for PBXNativeTarget "Laplace" */;
 			buildPhases = (
 				11BD59F60B8A7D0C4C6BB8EC /* [CP] Check Pods Manifest.lock */,
 				05D9800F1C8D4CBA00F8A255 /* Sources */,
 				05D980101C8D4CBA00F8A255 /* Frameworks */,
 				05D980111C8D4CBA00F8A255 /* Resources */,
-				187D70222CB7AC1EAEBFA6BB /* [CP] Embed Pods Frameworks */,
-				DBE18573D720344F26398CF1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = LongExposureVideo;
+			name = Laplace;
 			productName = openShutterVideo;
-			productReference = 05D980131C8D4CBA00F8A255 /* LongExposureVideo.app */;
+			productReference = 05D980131C8D4CBA00F8A255 /* Laplace.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -152,21 +145,22 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Rafael M Mudafort";
 				TargetAttributes = {
 					05D980121C8D4CBA00F8A255 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = WYX936TWEU;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
-			buildConfigurationList = 05D9800E1C8D4CBA00F8A255 /* Build configuration list for PBXProject "LongExposureVideo" */;
+			buildConfigurationList = 05D9800E1C8D4CBA00F8A255 /* Build configuration list for PBXProject "Laplace" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -175,7 +169,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				05D980121C8D4CBA00F8A255 /* LongExposureVideo */,
+				05D980121C8D4CBA00F8A255 /* Laplace */,
 			);
 		};
 /* End PBXProject section */
@@ -205,41 +199,11 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LongExposureVideo-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Laplace-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		187D70222CB7AC1EAEBFA6BB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LongExposureVideo/Pods-LongExposureVideo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DBE18573D720344F26398CF1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LongExposureVideo/Pods-LongExposureVideo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -250,8 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				403C9F791FFF4B37001FCC45 /* AssetManager.swift in Sources */,
-				0585FD9D1E186BDA0043071C /* UIImage+OpenCV.mm in Sources */,
-				057B116F1E1A3E420078725B /* openshutter.cpp in Sources */,
+				0537109D228F0B4B00FCEBFA /* image_kernals.cpp in Sources */,
 				0585FD961E1869A50043071C /* CVWrapper.mm in Sources */,
 				0585FDA31E19BCD40043071C /* CameraController.swift in Sources */,
 				05D980191C8D4CBA00F8A255 /* ViewController.swift in Sources */,
@@ -286,6 +249,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -294,12 +258,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -340,6 +306,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -348,12 +315,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -386,43 +355,41 @@
 		};
 		05D9803C1C8D4CBA00F8A255 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A9124CA19C99B272346C386 /* Pods-LongExposureVideo.debug.xcconfig */;
+			baseConfigurationReference = 0A9124CA19C99B272346C386 /* Pods-Laplace.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = WYX936TWEU;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "$(SRCROOT)/LongExposureVideo/app/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Laplace/app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = LongExposureVideo;
+				PRODUCT_BUNDLE_IDENTIFIER = Laplace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = LongExposureVideo/bridgingheader.h;
+				SWIFT_OBJC_BRIDGING_HEADER = Laplace/bridgingheader.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		05D9803D1C8D4CBA00F8A255 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B358C5F612BEBA9DDC8FB9F /* Pods-LongExposureVideo.release.xcconfig */;
+			baseConfigurationReference = 3B358C5F612BEBA9DDC8FB9F /* Pods-Laplace.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = WYX936TWEU;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "$(SRCROOT)/LongExposureVideo/app/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Laplace/app/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = LongExposureVideo;
+				PRODUCT_BUNDLE_IDENTIFIER = Laplace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = LongExposureVideo/bridgingheader.h;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_OBJC_BRIDGING_HEADER = Laplace/bridgingheader.h;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -430,7 +397,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		05D9800E1C8D4CBA00F8A255 /* Build configuration list for PBXProject "LongExposureVideo" */ = {
+		05D9800E1C8D4CBA00F8A255 /* Build configuration list for PBXProject "Laplace" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				05D980391C8D4CBA00F8A255 /* Debug */,
@@ -439,7 +406,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		05D9803B1C8D4CBA00F8A255 /* Build configuration list for PBXNativeTarget "LongExposureVideo" */ = {
+		05D9803B1C8D4CBA00F8A255 /* Build configuration list for PBXNativeTarget "Laplace" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				05D9803C1C8D4CBA00F8A255 /* Debug */,

@@ -7,8 +7,7 @@
 //
 
 #import "CVWrapper.h"
-#import "UIImage+OpenCV.h"
-#import "openshutter.hpp"
+#import "image_kernels.hpp"
 
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/videoio/videoio.hpp>
@@ -21,7 +20,6 @@
     Mat mat;
     Mat matout;
     UIImageToMat(inputImage, mat, true);
-//    Mat openMat = openshutter(mat);
     Mat openMat = mod_laplace(mat);
     UIImage* result = MatToUIImage(openMat);
     return result;
