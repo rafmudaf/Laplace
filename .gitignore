@@ -2,3 +2,4 @@
 gitignored
 xcuserdata/
 Pods/
+*/xcshareddata
