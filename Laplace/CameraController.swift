@@ -1,6 +1,6 @@
 //
 //  CameraController.swift
-//  LongExposureVideo
+//  Laplace
 //
 //  Created by Rafael M Mudafort on 1/1/17.
 //  Copyright © 2017 Rafael M Mudafort. All rights reserved.

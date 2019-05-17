@@ -1,6 +1,6 @@
 //
 //  AssetManager.swift
-//  LongExposureVideo
+//  Laplace
 //
 //  Created by Mudafort, Rafael on 1/4/18.
 //  Copyright © 2018 Rafael M Mudafort. All rights reserved.
@@ -11,7 +11,7 @@ import Photos
 
 class AssetManager {
     
-    private let appName = "LongExposureVideo"
+    private let appName = "Laplace"
     
     private var collection: PHAssetCollection!
     private var assetCollectionPlaceholder: PHObjectPlaceholder!

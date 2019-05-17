@@ -1,6 +1,6 @@
 //
 //  shaders.metal
-//  LongExposureVideo
+//  Laplace
 //
 //  Created by Mudafort, Rafael on 1/4/18.
 //  Copyright © 2018 Rafael M Mudafort. All rights reserved.

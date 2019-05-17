@@ -20,13 +20,13 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		3057C5DB64F3981B303DF8410DF39283 /* Pods-LongExposureVideo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 81FBE42502F434397052E2A13FA8CD87 /* Pods-LongExposureVideo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		56C3E83035BCE1288C35C2C8CFD4C4C4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
-		DFC3894F729224510CF0070F686B3DF0 /* Pods-LongExposureVideo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7079349FC9335147C4FF5B7203ED429E /* Pods-LongExposureVideo-dummy.m */; };
+		877A78B0C3A82FFFADA84E0F61AF0F6D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
+		DA8D3F104E007BCEA420962C75B3A68D /* Pods-Laplace-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 281272BAFBD933BCA7B961774A2FA1A3 /* Pods-Laplace-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F657987A10D0314EFDC6A216B642A7C1 /* Pods-Laplace-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D21418DFD8581526158940A31D3BA3 /* Pods-Laplace-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0049FCB606046B8058A485F59EB64534 /* PBXContainerItemProxy */ = {
+		F780BBC407D35132C17A966D0DEB680C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -36,41 +36,33 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1AC82FB766DB6C84D9D5B48E2456EE21 /* Pods-LongExposureVideo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LongExposureVideo.release.xcconfig"; sourceTree = "<group>"; };
+		0816D8625819D1BEDDC6CB5322621DC5 /* Pods-Laplace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Laplace.debug.xcconfig"; sourceTree = "<group>"; };
 		23555E268C6C98D689497A3F43544A02 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
-		5FE2F1400C36497D518AE202B8389EF7 /* Pods_LongExposureVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LongExposureVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		68870C55D6A570387E426BA0ECC38E4D /* Pods-LongExposureVideo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LongExposureVideo-acknowledgements.markdown"; sourceTree = "<group>"; };
+		281272BAFBD933BCA7B961774A2FA1A3 /* Pods-Laplace-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Laplace-umbrella.h"; sourceTree = "<group>"; };
+		4F80A4C4385E3A63F53DF874372AE029 /* Pods-Laplace.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Laplace.modulemap"; sourceTree = "<group>"; };
+		5B45AE16F80FA0E4145CF12B47C74064 /* Pods_Laplace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Laplace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		60D21418DFD8581526158940A31D3BA3 /* Pods-Laplace-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Laplace-dummy.m"; sourceTree = "<group>"; };
+		70337E969F2C8C6065BCDB5637C99AD1 /* Pods-Laplace-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Laplace-Info.plist"; sourceTree = "<group>"; };
 		7062332D4256C44B431F94F4B22EAECB /* OpenCV.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OpenCV.xcconfig; sourceTree = "<group>"; };
-		7079349FC9335147C4FF5B7203ED429E /* Pods-LongExposureVideo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LongExposureVideo-dummy.m"; sourceTree = "<group>"; };
-		81FBE42502F434397052E2A13FA8CD87 /* Pods-LongExposureVideo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LongExposureVideo-umbrella.h"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		AFF44345F2FACE9450745E2DCA3D9D68 /* Pods-LongExposureVideo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LongExposureVideo.debug.xcconfig"; sourceTree = "<group>"; };
+		AFEE6AC5C49249B43FFFE0DBE19A7BD0 /* Pods-Laplace-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Laplace-acknowledgements.markdown"; sourceTree = "<group>"; };
 		CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		D37184422A300322C9803FA40C5791AB /* Pods-LongExposureVideo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LongExposureVideo.modulemap"; sourceTree = "<group>"; };
-		F1996A03B23CDAAAACCF8746B8602D4B /* Pods-LongExposureVideo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LongExposureVideo-acknowledgements.plist"; sourceTree = "<group>"; };
-		F8D52CB0FB457F9A0E58ADCE55B8E14D /* Pods-LongExposureVideo-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LongExposureVideo-Info.plist"; sourceTree = "<group>"; };
+		D5D55A36DBA8EAF6EAD53B6BAD538CB5 /* Pods-Laplace-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Laplace-acknowledgements.plist"; sourceTree = "<group>"; };
+		D96A51534EEC8B297022F078C2C6FB47 /* Pods-Laplace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Laplace.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A0E86577EE1B7BD97E328344B3CD2B26 /* Frameworks */ = {
+		56CC2A694C78D48A8B33BACA584B366E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56C3E83035BCE1288C35C2C8CFD4C4C4 /* Foundation.framework in Frameworks */,
+				877A78B0C3A82FFFADA84E0F61AF0F6D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		013536C851946A31E23C5355A1F68A9A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5FE2F1400C36497D518AE202B8389EF7 /* Pods_LongExposureVideo.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		05AC75EE77A765080249A11050E9AF36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,12 +80,12 @@
 			path = OpenCV;
 			sourceTree = "<group>";
 		};
-		29508AA8361C4DB95157C85A9724B1AD /* Targets Support Files */ = {
+		320EB8CBE7F62F33F342F53278933C4F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				66AFC27BF14CEF80FBBDFE4A81D5DE96 /* Pods-LongExposureVideo */,
+				5B45AE16F80FA0E4145CF12B47C74064 /* Pods_Laplace.framework */,
 			);
-			name = "Targets Support Files";
+			name = Products;
 			sourceTree = "<group>";
 		};
 		3C853CBC73C2FB474453B2BC4B4C8FE9 /* Support Files */ = {
@@ -105,22 +97,6 @@
 			path = "../Target Support Files/OpenCV";
 			sourceTree = "<group>";
 		};
-		66AFC27BF14CEF80FBBDFE4A81D5DE96 /* Pods-LongExposureVideo */ = {
-			isa = PBXGroup;
-			children = (
-				D37184422A300322C9803FA40C5791AB /* Pods-LongExposureVideo.modulemap */,
-				68870C55D6A570387E426BA0ECC38E4D /* Pods-LongExposureVideo-acknowledgements.markdown */,
-				F1996A03B23CDAAAACCF8746B8602D4B /* Pods-LongExposureVideo-acknowledgements.plist */,
-				7079349FC9335147C4FF5B7203ED429E /* Pods-LongExposureVideo-dummy.m */,
-				F8D52CB0FB457F9A0E58ADCE55B8E14D /* Pods-LongExposureVideo-Info.plist */,
-				81FBE42502F434397052E2A13FA8CD87 /* Pods-LongExposureVideo-umbrella.h */,
-				AFF44345F2FACE9450745E2DCA3D9D68 /* Pods-LongExposureVideo.debug.xcconfig */,
-				1AC82FB766DB6C84D9D5B48E2456EE21 /* Pods-LongExposureVideo.release.xcconfig */,
-			);
-			name = "Pods-LongExposureVideo";
-			path = "Target Support Files/Pods-LongExposureVideo";
-			sourceTree = "<group>";
-		};
 		9B055D0CFEA43187E72B03DED11F5662 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,14 +105,22 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		B066B7A7F4C25C7E96733A51C2C360A9 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E23676A1406867C60E4EF9A89B34D11B /* Pods-Laplace */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
 				CFD032C4A1C123B6A951E0DA40802F05 /* Pods */,
-				013536C851946A31E23C5355A1F68A9A /* Products */,
-				29508AA8361C4DB95157C85A9724B1AD /* Targets Support Files */,
+				320EB8CBE7F62F33F342F53278933C4F /* Products */,
+				B066B7A7F4C25C7E96733A51C2C360A9 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -156,37 +140,53 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E23676A1406867C60E4EF9A89B34D11B /* Pods-Laplace */ = {
+			isa = PBXGroup;
+			children = (
+				4F80A4C4385E3A63F53DF874372AE029 /* Pods-Laplace.modulemap */,
+				AFEE6AC5C49249B43FFFE0DBE19A7BD0 /* Pods-Laplace-acknowledgements.markdown */,
+				D5D55A36DBA8EAF6EAD53B6BAD538CB5 /* Pods-Laplace-acknowledgements.plist */,
+				60D21418DFD8581526158940A31D3BA3 /* Pods-Laplace-dummy.m */,
+				70337E969F2C8C6065BCDB5637C99AD1 /* Pods-Laplace-Info.plist */,
+				281272BAFBD933BCA7B961774A2FA1A3 /* Pods-Laplace-umbrella.h */,
+				0816D8625819D1BEDDC6CB5322621DC5 /* Pods-Laplace.debug.xcconfig */,
+				D96A51534EEC8B297022F078C2C6FB47 /* Pods-Laplace.release.xcconfig */,
+			);
+			name = "Pods-Laplace";
+			path = "Target Support Files/Pods-Laplace";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		BA979C4FC65DC7546DD0D479B6B9C990 /* Headers */ = {
+		EF32E43BC8840CFE5842CFBCC4282887 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3057C5DB64F3981B303DF8410DF39283 /* Pods-LongExposureVideo-umbrella.h in Headers */,
+				DA8D3F104E007BCEA420962C75B3A68D /* Pods-Laplace-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		542C4ED6D70FD4F2BE3FADBA90785E38 /* Pods-LongExposureVideo */ = {
+		DDFE9A3D6B452503F8E4FA481E484EC7 /* Pods-Laplace */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B07586E48652A1AEFD648E7FA5D720BC /* Build configuration list for PBXNativeTarget "Pods-LongExposureVideo" */;
+			buildConfigurationList = A7F490A26D6D4492BC8048C428F71FBC /* Build configuration list for PBXNativeTarget "Pods-Laplace" */;
 			buildPhases = (
-				BA979C4FC65DC7546DD0D479B6B9C990 /* Headers */,
-				5C45C6CB27557D33C471DCB57EA2AF9A /* Sources */,
-				A0E86577EE1B7BD97E328344B3CD2B26 /* Frameworks */,
-				503C9CACAC1E598F89DE8D397F89F8CF /* Resources */,
+				EF32E43BC8840CFE5842CFBCC4282887 /* Headers */,
+				194D3E37E3F9DDF5E5DEBE21444A380D /* Sources */,
+				56CC2A694C78D48A8B33BACA584B366E /* Frameworks */,
+				0F31D15BFD4131B0534CB51C21F49E40 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				6347C267201A8ACD0BC7B435C10D4826 /* PBXTargetDependency */,
+				705722ABEDE2ED4F69E1F4FEDB70C076 /* PBXTargetDependency */,
 			);
-			name = "Pods-LongExposureVideo";
-			productName = "Pods-LongExposureVideo";
-			productReference = 5FE2F1400C36497D518AE202B8389EF7 /* Pods_LongExposureVideo.framework */;
+			name = "Pods-Laplace";
+			productName = "Pods-Laplace";
+			productReference = 5B45AE16F80FA0E4145CF12B47C74064 /* Pods_Laplace.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -207,18 +207,18 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 013536C851946A31E23C5355A1F68A9A /* Products */;
+			productRefGroup = 320EB8CBE7F62F33F342F53278933C4F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				C09FAABDC2FDD126292C42EDE0415C23 /* OpenCV */,
-				542C4ED6D70FD4F2BE3FADBA90785E38 /* Pods-LongExposureVideo */,
+				DDFE9A3D6B452503F8E4FA481E484EC7 /* Pods-Laplace */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		503C9CACAC1E598F89DE8D397F89F8CF /* Resources */ = {
+		0F31D15BFD4131B0534CB51C21F49E40 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -228,26 +228,61 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5C45C6CB27557D33C471DCB57EA2AF9A /* Sources */ = {
+		194D3E37E3F9DDF5E5DEBE21444A380D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFC3894F729224510CF0070F686B3DF0 /* Pods-LongExposureVideo-dummy.m in Sources */,
+				F657987A10D0314EFDC6A216B642A7C1 /* Pods-Laplace-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6347C267201A8ACD0BC7B435C10D4826 /* PBXTargetDependency */ = {
+		705722ABEDE2ED4F69E1F4FEDB70C076 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = OpenCV;
 			target = C09FAABDC2FDD126292C42EDE0415C23 /* OpenCV */;
-			targetProxy = 0049FCB606046B8058A485F59EB64534 /* PBXContainerItemProxy */;
+			targetProxy = F780BBC407D35132C17A966D0DEB680C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		057BDCA87DFDE4B5BFF7F2E6377944A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D96A51534EEC8B297022F078C2C6FB47 /* Pods-Laplace.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Laplace/Pods-Laplace-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Laplace/Pods-Laplace.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		4AB25E6DC93E2AED5970FE4DBA6EBDBF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -312,41 +347,6 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
-		};
-		5297E87FFD514C019A61752B91DC620E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1AC82FB766DB6C84D9D5B48E2456EE21 /* Pods-LongExposureVideo.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-LongExposureVideo/Pods-LongExposureVideo-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-LongExposureVideo/Pods-LongExposureVideo.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		580E248EBB0FF78B3DCFB5AA8300D0C6 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -435,9 +435,9 @@
 			};
 			name = Release;
 		};
-		E540D569A275656EB9B3B0BC42C53D4A /* Debug */ = {
+		D9A597CA00EB2A147265E2DF8DA38576 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AFF44345F2FACE9450745E2DCA3D9D68 /* Pods-LongExposureVideo.debug.xcconfig */;
+			baseConfigurationReference = 0816D8625819D1BEDDC6CB5322621DC5 /* Pods-Laplace.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -450,12 +450,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-LongExposureVideo/Pods-LongExposureVideo-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-Laplace/Pods-Laplace-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-LongExposureVideo/Pods-LongExposureVideo.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-Laplace/Pods-Laplace.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -481,20 +481,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		A7F490A26D6D4492BC8048C428F71FBC /* Build configuration list for PBXNativeTarget "Pods-Laplace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9A597CA00EB2A147265E2DF8DA38576 /* Debug */,
+				057BDCA87DFDE4B5BFF7F2E6377944A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AF6190B337FB4264B844753D51FB17E5 /* Build configuration list for PBXAggregateTarget "OpenCV" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				976FF0495D3D3B9B00BA87465FAE2AAC /* Debug */,
 				580E248EBB0FF78B3DCFB5AA8300D0C6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B07586E48652A1AEFD648E7FA5D720BC /* Build configuration list for PBXNativeTarget "Pods-LongExposureVideo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E540D569A275656EB9B3B0BC42C53D4A /* Debug */,
-				5297E87FFD514C019A61752B91DC620E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
