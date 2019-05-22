@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0537109D228F0B4B00FCEBFA /* image_kernals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0537109B228F0B4A00FCEBFA /* image_kernals.cpp */; };
 		0585FD961E1869A50043071C /* CVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0585FD951E1869A50043071C /* CVWrapper.mm */; };
 		0585FDA31E19BCD40043071C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0585FDA21E19BCD40043071C /* CameraController.swift */; };
 		05D980171C8D4CBA00F8A255 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D980161C8D4CBA00F8A255 /* AppDelegate.swift */; };
@@ -17,12 +16,11 @@
 		05D980211C8D4CBA00F8A255 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05D9801F1C8D4CBA00F8A255 /* LaunchScreen.storyboard */; };
 		403C9F761FFEF7E1001FCC45 /* shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 403C9F751FFEF7E1001FCC45 /* shaders.metal */; };
 		403C9F791FFF4B37001FCC45 /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C9F781FFF4B37001FCC45 /* AssetManager.swift */; };
+		40A1B3BF2295CC1700F00C54 /* image_kernals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40A1B3BD2295CC1600F00C54 /* image_kernals.cpp */; };
 		AB06F7173570C02A00E59C2C /* Pods_Laplace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3723D8FF682014B8060CE6 /* Pods_Laplace.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0537109B228F0B4A00FCEBFA /* image_kernals.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = image_kernals.cpp; path = /Users/raf/Development/Laplace/Laplace/image_kernals.cpp; sourceTree = "<absolute>"; };
-		0537109C228F0B4B00FCEBFA /* image_kernels.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = image_kernels.hpp; path = /Users/raf/Development/Laplace/Laplace/image_kernels.hpp; sourceTree = "<absolute>"; };
 		0585FD931E1868B00043071C /* bridgingheader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridgingheader.h; sourceTree = "<group>"; };
 		0585FD941E1868E10043071C /* CVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVWrapper.h; sourceTree = "<group>"; };
 		0585FD951E1869A50043071C /* CVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVWrapper.mm; sourceTree = "<group>"; };
@@ -39,6 +37,8 @@
 		3B358C5F612BEBA9DDC8FB9F /* Pods-Laplace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Laplace.release.xcconfig"; path = "Pods/Target Support Files/Pods-Laplace/Pods-Laplace.release.xcconfig"; sourceTree = "<group>"; };
 		403C9F751FFEF7E1001FCC45 /* shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = shaders.metal; sourceTree = "<group>"; };
 		403C9F781FFF4B37001FCC45 /* AssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
+		40A1B3BD2295CC1600F00C54 /* image_kernals.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = image_kernals.cpp; sourceTree = "<group>"; };
+		40A1B3BE2295CC1600F00C54 /* image_kernels.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = image_kernels.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,8 +84,8 @@
 				0585FDA21E19BCD40043071C /* CameraController.swift */,
 				403C9F781FFF4B37001FCC45 /* AssetManager.swift */,
 				403C9F751FFEF7E1001FCC45 /* shaders.metal */,
-				0537109B228F0B4A00FCEBFA /* image_kernals.cpp */,
-				0537109C228F0B4B00FCEBFA /* image_kernels.hpp */,
+				40A1B3BD2295CC1600F00C54 /* image_kernals.cpp */,
+				40A1B3BE2295CC1600F00C54 /* image_kernels.hpp */,
 			);
 			path = Laplace;
 			sourceTree = "<group>";
@@ -214,7 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				403C9F791FFF4B37001FCC45 /* AssetManager.swift in Sources */,
-				0537109D228F0B4B00FCEBFA /* image_kernals.cpp in Sources */,
+				40A1B3BF2295CC1700F00C54 /* image_kernals.cpp in Sources */,
 				0585FD961E1869A50043071C /* CVWrapper.mm in Sources */,
 				0585FDA31E19BCD40043071C /* CameraController.swift in Sources */,
 				05D980191C8D4CBA00F8A255 /* ViewController.swift in Sources */,
