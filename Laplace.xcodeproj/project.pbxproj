@@ -17,7 +17,7 @@
 		403C9F761FFEF7E1001FCC45 /* shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 403C9F751FFEF7E1001FCC45 /* shaders.metal */; };
 		403C9F791FFF4B37001FCC45 /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C9F781FFF4B37001FCC45 /* AssetManager.swift */; };
 		40A1B3BF2295CC1700F00C54 /* image_kernals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40A1B3BD2295CC1600F00C54 /* image_kernals.cpp */; };
-		AB06F7173570C02A00E59C2C /* Pods_Laplace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3723D8FF682014B8060CE6 /* Pods_Laplace.framework */; };
+		40BDC2982AFAF43D00E1B6DC /* OpenCV in Frameworks */ = {isa = PBXBuildFile; productRef = 40BDC2972AFAF43D00E1B6DC /* OpenCV */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,9 +32,6 @@
 		05D9801D1C8D4CBA00F8A255 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05D980201C8D4CBA00F8A255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		05D980221C8D4CBA00F8A255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A9124CA19C99B272346C386 /* Pods-Laplace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Laplace.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Laplace/Pods-Laplace.debug.xcconfig"; sourceTree = "<group>"; };
-		3A3723D8FF682014B8060CE6 /* Pods_Laplace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Laplace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B358C5F612BEBA9DDC8FB9F /* Pods-Laplace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Laplace.release.xcconfig"; path = "Pods/Target Support Files/Pods-Laplace/Pods-Laplace.release.xcconfig"; sourceTree = "<group>"; };
 		403C9F751FFEF7E1001FCC45 /* shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = shaders.metal; sourceTree = "<group>"; };
 		403C9F781FFF4B37001FCC45 /* AssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
 		40A1B3BD2295CC1600F00C54 /* image_kernals.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = image_kernals.cpp; sourceTree = "<group>"; };
@@ -46,7 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB06F7173570C02A00E59C2C /* Pods_Laplace.framework in Frameworks */,
+				40BDC2982AFAF43D00E1B6DC /* OpenCV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,8 +55,6 @@
 			children = (
 				05D980151C8D4CBA00F8A255 /* Laplace */,
 				05D980141C8D4CBA00F8A255 /* Products */,
-				D42813D93DACCDE109A1DC78 /* Pods */,
-				0C37121B526784B186D229FD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,14 +85,6 @@
 			path = Laplace;
 			sourceTree = "<group>";
 		};
-		0C37121B526784B186D229FD /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3A3723D8FF682014B8060CE6 /* Pods_Laplace.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		403C9F771FFEFCB4001FCC45 /* app */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,15 +95,6 @@
 			path = app;
 			sourceTree = "<group>";
 		};
-		D42813D93DACCDE109A1DC78 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				0A9124CA19C99B272346C386 /* Pods-Laplace.debug.xcconfig */,
-				3B358C5F612BEBA9DDC8FB9F /* Pods-Laplace.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -124,7 +102,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 05D9803B1C8D4CBA00F8A255 /* Build configuration list for PBXNativeTarget "Laplace" */;
 			buildPhases = (
-				11BD59F60B8A7D0C4C6BB8EC /* [CP] Check Pods Manifest.lock */,
 				05D9800F1C8D4CBA00F8A255 /* Sources */,
 				05D980101C8D4CBA00F8A255 /* Frameworks */,
 				05D980111C8D4CBA00F8A255 /* Resources */,
@@ -134,6 +111,9 @@
 			dependencies = (
 			);
 			name = Laplace;
+			packageProductDependencies = (
+				40BDC2972AFAF43D00E1B6DC /* OpenCV */,
+			);
 			productName = openShutterVideo;
 			productReference = 05D980131C8D4CBA00F8A255 /* Laplace.app */;
 			productType = "com.apple.product-type.application";
@@ -164,6 +144,9 @@
 				Base,
 			);
 			mainGroup = 05D9800A1C8D4CBA00F8A255;
+			packageReferences = (
+				40BDC2962AFAF43D00E1B6DC /* XCRemoteSwiftPackageReference "opencv-spm" */,
+			);
 			productRefGroup = 05D980141C8D4CBA00F8A255 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -185,27 +168,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		11BD59F60B8A7D0C4C6BB8EC /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Laplace-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		05D9800F1C8D4CBA00F8A255 /* Sources */ = {
@@ -415,6 +377,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		40BDC2962AFAF43D00E1B6DC /* XCRemoteSwiftPackageReference "opencv-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yeatse/opencv-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.8.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		40BDC2972AFAF43D00E1B6DC /* OpenCV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 40BDC2962AFAF43D00E1B6DC /* XCRemoteSwiftPackageReference "opencv-spm" */;
+			productName = OpenCV;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 05D9800B1C8D4CBA00F8A255 /* Project object */;
 }
