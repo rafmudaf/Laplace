@@ -7,19 +7,16 @@
 //
 
 import UIKit
-import AVFoundation
-import GLKit
+//import AVFoundation
+import MetalKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var videoPreviewView: UIView!
+    @IBOutlet weak var videoPreviewView: MTKView!
     @IBOutlet weak var swapCameraButton: UIButton!
     @IBOutlet weak var recordVideoButton: UIButton!
     
-    var glContext: EAGLContext?
-    var ciContext: CIContext?
-    var renderBuffer: GLuint = GLuint()
-    var glView: GLKView?
+    var _view = MTKView()
 
     var cameraController: CameraController!
 
@@ -27,19 +24,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         cameraController = CameraController(delegate: self)
         
-        let glContext = EAGLContext(api: .openGLES2)
-        let glView = GLKView(frame: videoPreviewView.frame, context: glContext!)
-        glView.backgroundColor = .black
-        glView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))
+        _view = self.videoPreviewView
+//        _view.enableSetNeedsDisplay = true
+        _view.device = MTLCreateSystemDefaultDevice()
+        _view.clearColor = MTLClearColorMake(0.0, 0.5, 1.0, 1.0)
         
-        glView.frame = videoPreviewView.frame
-        let ciContext = CIContext(eaglContext: glContext!)
-        videoPreviewView.addSubview(glView)
-        
-        // set global variables
-        self.glContext = glContext
-        self.ciContext = ciContext
-        self.glView = glView
+        let _renderer = Renderer(mtkView: _view)
+        _view.delegate = _renderer
+
+        // Initialize the renderer with the view size.
+        _renderer.mtkView(_view, drawableSizeWillChange: _view.drawableSize)        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,17 +54,17 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: CameraControllerDelegate {    
+extension ViewController: CameraControllerDelegate {
     func cameraController(cameraController: CameraController, didOutputImage image: CIImage) {
-        if glContext != EAGLContext.current() {
-            EAGLContext.setCurrent(glContext)
-        }
-        guard let glView = self.glView else {
-            fatalError("glView not accessible")
-        }
-        
-        glView.bindDrawable()
-        ciContext?.draw(image, in: image.extent, from: image.extent)
-        glView.display()
+//        if glContext != EAGLContext.current() {
+//            EAGLContext.setCurrent(glContext)
+//        }
+//        guard let glView = self.glView else {
+//            fatalError("glView not accessible")
+//        }
+//        
+//        glView.bindDrawable()
+//        ciContext?.draw(image, in: image.extent, from: image.extent)
+//        glView.display()
     }
 }

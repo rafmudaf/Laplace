@@ -18,6 +18,7 @@
 		403C9F791FFF4B37001FCC45 /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C9F781FFF4B37001FCC45 /* AssetManager.swift */; };
 		40A1B3BF2295CC1700F00C54 /* image_kernals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40A1B3BD2295CC1600F00C54 /* image_kernals.cpp */; };
 		40BDC2982AFAF43D00E1B6DC /* OpenCV in Frameworks */ = {isa = PBXBuildFile; productRef = 40BDC2972AFAF43D00E1B6DC /* OpenCV */; };
+		40E9A2292AFB5C0F0089B853 /* renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E9A2282AFB5C0F0089B853 /* renderer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		403C9F781FFF4B37001FCC45 /* AssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
 		40A1B3BD2295CC1600F00C54 /* image_kernals.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = image_kernals.cpp; sourceTree = "<group>"; };
 		40A1B3BE2295CC1600F00C54 /* image_kernels.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = image_kernels.hpp; sourceTree = "<group>"; };
+		40E9A2282AFB5C0F0089B853 /* renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = renderer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				403C9F771FFEFCB4001FCC45 /* app */,
 				05D980161C8D4CBA00F8A255 /* AppDelegate.swift */,
 				05D980181C8D4CBA00F8A255 /* ViewController.swift */,
+				40E9A2282AFB5C0F0089B853 /* renderer.swift */,
 				05D9801A1C8D4CBA00F8A255 /* Main.storyboard */,
 				0585FD941E1868E10043071C /* CVWrapper.h */,
 				0585FD951E1869A50043071C /* CVWrapper.mm */,
@@ -175,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40E9A2292AFB5C0F0089B853 /* renderer.swift in Sources */,
 				403C9F791FFF4B37001FCC45 /* AssetManager.swift in Sources */,
 				40A1B3BF2295CC1700F00C54 /* image_kernals.cpp in Sources */,
 				0585FD961E1869A50043071C /* CVWrapper.mm in Sources */,
