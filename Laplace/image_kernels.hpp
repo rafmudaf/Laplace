@@ -21,6 +21,7 @@
 using namespace cv;
 using namespace std;
 
+Mat noop(Mat image);
 Mat openshutter(Mat i0);
 Mat lastframe();
 Mat mod_laplace(Mat image);

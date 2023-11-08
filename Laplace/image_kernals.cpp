@@ -12,6 +12,10 @@ int maxFrameCount = 20;
 Mat ims[20];
 int framecount = 0;
 
+Mat noop(Mat image) {
+    return image;
+}
+
 Mat openshutter(Mat i0) {
     
     // shift the image array over one index
