@@ -442,7 +442,11 @@ private extension CameraController {
             }
             
             // set the back camera as the initial device
-            self.currentCameraDevice = self.backCameraDevice
+            guard let backCameraDevice = self.backCameraDevice else {
+                print("Back camera device is not available.")
+                return
+            }
+            self.currentCameraDevice = backCameraDevice
             do {
                 let possibleCameraInput = try AVCaptureDeviceInput(device: self.currentCameraDevice!)
                 let backCameraInput = possibleCameraInput
